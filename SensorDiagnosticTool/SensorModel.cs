@@ -13,6 +13,7 @@ using Windows7.Sensors;
 
 namespace SensorDiagnosticTool
 {
+    // ReSharper disable ResourceItemNotResolved
     class SensorModel
     {
         private Sensor m_sensor;
@@ -982,4 +983,6 @@ namespace SensorDiagnosticTool
             w.WriteEndElement();
         }
     }
+    // ReSharper restore ResourceItemNotResolved
+
 }

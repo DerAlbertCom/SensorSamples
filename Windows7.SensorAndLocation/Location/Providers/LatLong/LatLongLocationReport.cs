@@ -1,45 +1,41 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 
+using System;
 using Windows7.Location.Internal;
 
 namespace Windows7.Location
-{   
+{
     /// <summary>
-    /// Represents a latitude/longitude/altitude report.
+    ///     Represents a latitude/longitude/altitude report.
     /// </summary>
     public class LatLongLocationReport : LocationReport
     {
-        private ILatLongReport _latLongReport;
+        ILatLongReport _latLongReport;
 
         public LatLongLocationReport()
         {
-
         }
 
         /// <summary>
-        /// Initializes the position report to the specified values.  Use to set the default location.
+        ///     Initializes the position report to the specified values.  Use to set the default location.
         /// </summary>
         /// <param name="latitude">The latitude to report.</param>
         /// <param name="longitude">The longitude to report.</param>
         /// <param name="errorRadius">The error radius to report.</param>
         /// <param name="altitude">The altitude to report.</param>
         /// <param name="altitudeError">The altitude error to report.</param>
-        public LatLongLocationReport(double latitude, double longitude, double errorRadius, double altitude, double altitudeError)
+        public LatLongLocationReport(double latitude,
+                                     double longitude,
+                                     double errorRadius,
+                                     double altitude,
+                                     double altitudeError)
         {
-            DefaultLatLongReport report = new DefaultLatLongReport(latitude, longitude, errorRadius, altitude, altitudeError);
+            var report = new DefaultLatLongReport(latitude, longitude, errorRadius, altitude, altitudeError);
             InitializeReport(report);
         }
 
         /// <summary>
-        /// Initialized the instance.
-        /// </summary>
-        protected override void Initialize()
-        {
-            _latLongReport = (ILatLongReport)InnerObject;
-        }
-        
-        /// <summary>
-        /// Latitude.
+        ///     Latitude.
         /// </summary>
         public double Latitude
         {
@@ -47,7 +43,7 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Longitude.
+        ///     Longitude.
         /// </summary>
         public double Longitude
         {
@@ -55,7 +51,7 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Altitude in meters.
+        ///     Altitude in meters.
         /// </summary>
         public double Altitude
         {
@@ -63,7 +59,7 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Error radius.
+        ///     Error radius.
         /// </summary>
         public double ErrorRadius
         {
@@ -71,11 +67,19 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Altitude error in meters.
+        ///     Altitude error in meters.
         /// </summary>
         public double AltitudeError
         {
             get { return _latLongReport.GetAltitudeError(); }
+        }
+
+        /// <summary>
+        ///     Initialized the instance.
+        /// </summary>
+        protected override void Initialize()
+        {
+            _latLongReport = (ILatLongReport) InnerObject;
         }
     }
 }

@@ -1,33 +1,35 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
-using Windows7.Location.Internal;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
+using Windows7.Location.Internal;
 
 namespace Windows7.Location
 {
     /// <summary>
-    /// A base class for event providers, e.g. <see cref="LatLongLocationProvider"/> and <see cref="CivicAddressLocationProvider"/>.
+    ///     A base class for event providers, e.g. <see cref="LatLongLocationProvider" /> and
+    ///     <see
+    ///         cref="CivicAddressLocationProvider" />
+    ///     .
     /// </summary>
     public abstract class LocationProvider : ILocationEvents
     {
         #region Private fields
 
-        private static ILocation _location = new COMLocation();
-        private Guid _reportGuid;
+        static readonly ILocation _location = new COMLocation();
+        Guid _reportGuid;
 
         #endregion
-        
+
         #region Events
 
         /// <summary>
-        /// Event notifying about location changes.
+        ///     Event notifying about location changes.
         /// </summary>
         public event LocationChangedEventHandler LocationChanged;
-        
+
         /// <summary>
-        /// Event notifying about provider status changes.
+        ///     Event notifying about provider status changes.
         /// </summary>
         public event LocationProviderStatusChangedEventHandler StatusChanged;
 
@@ -36,17 +38,18 @@ namespace Windows7.Location
         #region Constructor
 
         /// <summary>
-        /// Constructs the LocationProvider instance with the specified minimal report interval.
+        ///     Constructs the LocationProvider instance with the specified minimal report interval.
         /// </summary>
         protected LocationProvider(uint minReportInterval)
         {
             Type t = GetType();
-            object[] attrs = t.GetCustomAttributes(typeof(LocationProviderDescriptionAttribute), true);
+            object[] attrs = t.GetCustomAttributes(typeof (LocationProviderDescriptionAttribute), true);
 
             if (attrs == null || attrs.Length == 0)
-                throw new NotSupportedException(String.Format("Report {0} does not have the LocationReportDescription attribute", t.Name));
+                throw new NotSupportedException(
+                    String.Format("Report {0} does not have the LocationReportDescription attribute", t.Name));
 
-            LocationProviderDescriptionAttribute attr = (LocationProviderDescriptionAttribute)attrs[0];
+            var attr = (LocationProviderDescriptionAttribute) attrs[0];
             _reportGuid = attr.ReportTypeGuid;
 
             _location.RegisterForReport(this, ref _reportGuid, minReportInterval);
@@ -57,18 +60,7 @@ namespace Windows7.Location
         #region Public methods and properties
 
         /// <summary>
-        /// Synchronously returns a location report. Cast it to the appropriate derived type.
-        /// </summary>
-        /// <returns>Report wrapper.</returns>
-        public LocationReport GetReport()
-        {
-            ILocationReport iLocReport = null;
-            _location.GetReport(ref _reportGuid, out iLocReport);
-            return CreateReport(iLocReport);
-        }
-
-        /// <summary>
-        /// Returns the current provider status.
+        ///     Returns the current provider status.
         /// </summary>
         public ReportStatus ReportStatus
         {
@@ -84,10 +76,10 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Gets or sets the report interval, in milliseconds.
+        ///     Gets or sets the report interval, in milliseconds.
         /// </summary>
         /// <remarks>
-        /// You can only get/set the report interval after registering for the <see cref="LocationProvider.LocationChanged"/> event.
+        ///     You can only get/set the report interval after registering for the <see cref="LocationProvider.LocationChanged" /> event.
         /// </remarks>
         public uint ReportInterval
         {
@@ -101,12 +93,23 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Gets desired report accuracy.  
-        /// The desired accuracy is a global setting that affects all providers.
+        ///     Synchronously returns a location report. Cast it to the appropriate derived type.
+        /// </summary>
+        /// <returns>Report wrapper.</returns>
+        public LocationReport GetReport()
+        {
+            ILocationReport iLocReport = null;
+            _location.GetReport(ref _reportGuid, out iLocReport);
+            return CreateReport(iLocReport);
+        }
+
+        /// <summary>
+        ///     Gets desired report accuracy.
+        ///     The desired accuracy is a global setting that affects all providers.
         /// </summary>
         public static DesiredAccuracy GetDesiredAccuracy(Guid reportType)
         {
-            DesiredAccuracy da = DesiredAccuracy.Default;
+            var da = DesiredAccuracy.Default;
             if (_location != null)
             {
                 _location.GetDesiredAccuracy(ref reportType, out da);
@@ -115,8 +118,8 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Sets desired report accuracy.  
-        /// The desired accuracy is a global setting that affects all providers.
+        ///     Sets desired report accuracy.
+        ///     The desired accuracy is a global setting that affects all providers.
         /// </summary>
         public static void SetDesiredAccuracy(Guid reportType, DesiredAccuracy accuracy)
         {
@@ -127,7 +130,7 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Requests the user permission to access the given report types/location providers.
+        ///     Requests the user permission to access the given report types/location providers.
         /// </summary>
         /// <param name="hWndParent">HWND handle to a window that can act as a parent to the permissions dialog box.</param>
         /// <param name="modal">Speficifies whether the window should be modal.</param>
@@ -137,7 +140,7 @@ namespace Windows7.Location
             if (providers == null || providers.Length == 0)
                 throw new ArgumentNullException("providers", "Reports must not be null or empty.");
 
-            Guid[] guids = new Guid[providers.Length];
+            var guids = new Guid[providers.Length];
             for (int i = 0; i < providers.Length; i++)
                 guids[i] = providers[i].ReportGuid;
 
@@ -193,7 +196,7 @@ namespace Windows7.Location
         #region Internal methods and properties
 
         /// <summary>
-        /// Returns the report GUID (information provided by the attribute).
+        ///     Returns the report GUID (information provided by the attribute).
         /// </summary>
         internal Guid ReportGuid
         {
@@ -201,11 +204,11 @@ namespace Windows7.Location
         }
 
         /// <summary>
-        /// Creates a wrapper report instance for the given report COM object.
+        ///     Creates a wrapper report instance for the given report COM object.
         /// </summary>
         /// <param name="iLocReport">Report COM object.</param>
         /// <returns>Report wrapper.</returns>
-        private LocationReport CreateReport(ILocationReport iLocReport)
+        LocationReport CreateReport(ILocationReport iLocReport)
         {
             LocationReport locReport = CreateReport();
             locReport.InitializeReport(iLocReport);
@@ -213,6 +216,5 @@ namespace Windows7.Location
         }
 
         #endregion
-
     }
 }

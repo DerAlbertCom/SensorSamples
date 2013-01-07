@@ -1,55 +1,37 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
+using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
 namespace Windows7.Sensors.Internal
 {
     /// <summary>
-    /// A structure containing the actual data type ID and a union of supported property value data types.
-    /// Contains conversions to .NET objects.
+    ///     A structure containing the actual data type ID and a union of supported property value data types.
+    ///     Contains conversions to .NET objects.
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
     internal struct PROPVARIANT
     {
-        [FieldOffset(0)]
-        private VarEnum vt;
+        [FieldOffset(0)] VarEnum vt;
 
-        [FieldOffset(8)]
-        private SByte cVal;
-        [FieldOffset(8)]
-        private Byte bVal;
-        [FieldOffset(8)]
-        private UInt16 iVal;
-        [FieldOffset(8)]
-        private UInt16 uiVal;
-        [FieldOffset(8)]
-        private Int32 lVal;
-        [FieldOffset(8)]
-        private UInt32 ulVal;
-        [FieldOffset(8)]
-        private Int32 intVal;
-        [FieldOffset(8)]
-        private UInt32 uintVal;
-        [FieldOffset(8)]
-        private Int64 hVal;
-        [FieldOffset(8)]
-        private UInt64 uhVal;
-        [FieldOffset(8)]
-        private Single fltVal;
-        [FieldOffset(8)]
-        private Double dblVal;
-        [FieldOffset(8), MarshalAs(UnmanagedType.VariantBool)]
-        private Boolean boolVal;
-        [FieldOffset(8), MarshalAs(UnmanagedType.Error)]
-        private Int32 scode;
-        [FieldOffset(8)]
-        private System.Runtime.InteropServices.ComTypes.FILETIME filetime;
-        [FieldOffset(8)]
-        private IntPtr ptr;
-        [FieldOffset(8)]
-        private CArray cArray;
+        [FieldOffset(8)] readonly SByte cVal;
+        [FieldOffset(8)] readonly Byte bVal;
+        [FieldOffset(8)] readonly UInt16 iVal;
+        [FieldOffset(8)] readonly UInt16 uiVal;
+        [FieldOffset(8)] readonly Int32 lVal;
+        [FieldOffset(8)] readonly UInt32 ulVal;
+        [FieldOffset(8)] readonly Int32 intVal;
+        [FieldOffset(8)] readonly UInt32 uintVal;
+        [FieldOffset(8)] Int64 hVal;
+        [FieldOffset(8)] readonly UInt64 uhVal;
+        [FieldOffset(8)] Single fltVal;
+        [FieldOffset(8)] Double dblVal;
+        [FieldOffset(8), MarshalAs(UnmanagedType.VariantBool)] Boolean boolVal;
+        [FieldOffset(8), MarshalAs(UnmanagedType.Error)] readonly Int32 scode;
+        [FieldOffset(8)] readonly FILETIME filetime;
+        [FieldOffset(8)] IntPtr ptr;
+        [FieldOffset(8)] CArray cArray;
 
         public VarEnum VarType
         {
@@ -91,11 +73,11 @@ namespace Windows7.Sensors.Internal
             ptr = Marshal.StringToCoTaskMemUni(value);
         }
 
-        private unsafe object GetValue(VarEnum vt)
+        object GetValue(VarEnum vt)
         {
             object value = null;
 
-            switch ((VarEnum)vt)
+            switch (vt)
             {
                 case VarEnum.VT_EMPTY:
                 case VarEnum.VT_NULL:
@@ -229,30 +211,30 @@ namespace Windows7.Sensors.Internal
                     value = GetVectorData<bool>();
                     break;
                 case VarEnum.VT_CLSID:
-                    value = Marshal.PtrToStructure(ptr, typeof(Guid));
+                    value = Marshal.PtrToStructure(ptr, typeof (Guid));
                     break;
                 default:
-                    throw new NotSupportedException("The type of this variable is not supported ('" + vt.ToString() + "')");
-                    
+                    throw new NotSupportedException("The type of this variable is not supported ('" + vt.ToString() +
+                                                    "')");
             }
 
             return value;
         }
 
         [DllImport("ole32.dll")]
-        private static extern Int32 PropVariantClear(ref PROPVARIANT pvar);
+        static extern Int32 PropVariantClear(ref PROPVARIANT pvar);
 
         [DllImport("kernel32.dll")]
-        private static extern void RtlMoveMemory(IntPtr dst, IntPtr src, uint size);
+        static extern void RtlMoveMemory(IntPtr dst, IntPtr src, uint size);
 
-        private unsafe T[] GetVectorData<T>() where T : struct
+        T[] GetVectorData<T>() where T : struct
         {
             if (uiVal == 0 || cArray.pElems == IntPtr.Zero)
                 return new T[0];
 
-            T[] data = new T[uiVal];
-            uint tSize = (uint) Marshal.SizeOf(typeof(T));
-            
+            var data = new T[uiVal];
+            var tSize = (uint) Marshal.SizeOf(typeof (T));
+
             GCHandle pinningGCH = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
@@ -263,7 +245,7 @@ namespace Windows7.Sensors.Internal
             {
                 pinningGCH.Free();
             }
-            
+
             return data;
         }
 
@@ -279,11 +261,5 @@ namespace Windows7.Sensors.Internal
             vt = VarEnum.VT_EMPTY;
             ptr = IntPtr.Zero;
         }
-    }
-
-    public struct CArray
-    {
-        public uint cElems;
-        public IntPtr pElems;
     }
 }

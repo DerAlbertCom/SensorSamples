@@ -6,7 +6,7 @@ using System;
 namespace Windows7.Location
 {
     /// <summary>
-    /// Represents the state of the report.
+    ///     Represents the state of the report.
     /// </summary>
     public enum ReportStatus
     {
