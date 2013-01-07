@@ -79,7 +79,7 @@ namespace SensorDiagnosticTool
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.ShowItemToolTips = false;
-            this.toolStrip1.Size = new System.Drawing.Size(760, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(754, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -173,7 +173,7 @@ namespace SensorDiagnosticTool
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(183, 25);
+            this.splitContainer2.Location = new System.Drawing.Point(313, 25);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -184,7 +184,7 @@ namespace SensorDiagnosticTool
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBoxEvents);
-            this.splitContainer2.Size = new System.Drawing.Size(577, 420);
+            this.splitContainer2.Size = new System.Drawing.Size(441, 420);
             this.splitContainer2.SplitterDistance = 298;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -202,7 +202,7 @@ namespace SensorDiagnosticTool
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.groupBoxData);
-            this.splitContainer3.Size = new System.Drawing.Size(577, 298);
+            this.splitContainer3.Size = new System.Drawing.Size(441, 298);
             this.splitContainer3.SplitterDistance = 175;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -212,7 +212,7 @@ namespace SensorDiagnosticTool
             this.groupBoxProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxProperties.Location = new System.Drawing.Point(0, 0);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(577, 175);
+            this.groupBoxProperties.Size = new System.Drawing.Size(441, 175);
             this.groupBoxProperties.TabIndex = 1;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Properties";
@@ -231,7 +231,7 @@ namespace SensorDiagnosticTool
             this.dataGridViewProperties.Name = "dataGridViewProperties";
             this.dataGridViewProperties.ReadOnly = true;
             this.dataGridViewProperties.RowHeadersVisible = false;
-            this.dataGridViewProperties.Size = new System.Drawing.Size(571, 156);
+            this.dataGridViewProperties.Size = new System.Drawing.Size(435, 156);
             this.dataGridViewProperties.TabIndex = 0;
             // 
             // ColumnName
@@ -254,7 +254,7 @@ namespace SensorDiagnosticTool
             this.groupBoxData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxData.Location = new System.Drawing.Point(0, 0);
             this.groupBoxData.Name = "groupBoxData";
-            this.groupBoxData.Size = new System.Drawing.Size(577, 119);
+            this.groupBoxData.Size = new System.Drawing.Size(441, 119);
             this.groupBoxData.TabIndex = 1;
             this.groupBoxData.TabStop = false;
             this.groupBoxData.Text = "Data";
@@ -273,7 +273,7 @@ namespace SensorDiagnosticTool
             this.dataGridViewData.Name = "dataGridViewData";
             this.dataGridViewData.ReadOnly = true;
             this.dataGridViewData.RowHeadersVisible = false;
-            this.dataGridViewData.Size = new System.Drawing.Size(571, 100);
+            this.dataGridViewData.Size = new System.Drawing.Size(435, 100);
             this.dataGridViewData.TabIndex = 0;
             // 
             // Column1
@@ -296,7 +296,7 @@ namespace SensorDiagnosticTool
             this.groupBoxEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxEvents.Location = new System.Drawing.Point(0, 0);
             this.groupBoxEvents.Name = "groupBoxEvents";
-            this.groupBoxEvents.Size = new System.Drawing.Size(577, 118);
+            this.groupBoxEvents.Size = new System.Drawing.Size(441, 118);
             this.groupBoxEvents.TabIndex = 1;
             this.groupBoxEvents.TabStop = false;
             this.groupBoxEvents.Text = "Events";
@@ -310,7 +310,7 @@ namespace SensorDiagnosticTool
             this.textBoxEvents.Name = "textBoxEvents";
             this.textBoxEvents.ReadOnly = true;
             this.textBoxEvents.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxEvents.Size = new System.Drawing.Size(571, 99);
+            this.textBoxEvents.Size = new System.Drawing.Size(435, 99);
             this.textBoxEvents.TabIndex = 0;
             // 
             // treeViewSensors
@@ -318,12 +318,12 @@ namespace SensorDiagnosticTool
             this.treeViewSensors.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeViewSensors.Location = new System.Drawing.Point(0, 25);
             this.treeViewSensors.Name = "treeViewSensors";
-            this.treeViewSensors.Size = new System.Drawing.Size(183, 420);
+            this.treeViewSensors.Size = new System.Drawing.Size(313, 420);
             this.treeViewSensors.TabIndex = 0;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(183, 25);
+            this.splitter1.Location = new System.Drawing.Point(313, 25);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(2, 420);
             this.splitter1.TabIndex = 1;
@@ -333,7 +333,7 @@ namespace SensorDiagnosticTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 445);
+            this.ClientSize = new System.Drawing.Size(754, 445);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.treeViewSensors);

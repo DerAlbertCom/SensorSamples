@@ -37,7 +37,8 @@ namespace SensorDiagnosticTool
         {
             InitializeComponent();
 
-            m_resourceManager = new ResourceManager("SensorDiagnosticTool.Properties.Resources", System.Reflection.Assembly.GetExecutingAssembly());
+            m_resourceManager = new ResourceManager(GetType().FullName,
+                                                    System.Reflection.Assembly.GetExecutingAssembly());
 
             m_locationLatLong = new LatLongLocationProvider(MIN_REPORT_INTERVAL);
             m_locationCivicAddress = new CivicAddressLocationProvider(MIN_REPORT_INTERVAL);
@@ -52,14 +53,19 @@ namespace SensorDiagnosticTool
 
             SensorManager.SensorEnter += new SensorEnterEventHandler(SensorEnterHandler);
             m_locationLatLong.LocationChanged += new LocationChangedEventHandler(LocationChangedHandler);
-            m_locationLatLong.StatusChanged += new LocationProviderStatusChangedEventHandler(LocationStatusChangedHandler);
+            m_locationLatLong.StatusChanged +=
+                new LocationProviderStatusChangedEventHandler(LocationStatusChangedHandler);
             m_locationCivicAddress.LocationChanged += new LocationChangedEventHandler(LocationChangedHandler);
-            m_locationCivicAddress.StatusChanged += new LocationProviderStatusChangedEventHandler(LocationStatusChangedHandler);
+            m_locationCivicAddress.StatusChanged +=
+                new LocationProviderStatusChangedEventHandler(LocationStatusChangedHandler);
 
             // Log Location data at startup to have initial values
-            SensorModel.LogReport((LocationReport)SensorModel.GetLatLongReport());
-            SensorModel.LogReport((LocationReport)SensorModel.GetCivicAddressReport());
+            SensorModel.LogReport((LocationReport) SensorModel.GetLatLongReport());
+            SensorModel.LogReport((LocationReport) SensorModel.GetCivicAddressReport());
             SensorModel.LogReport(SensorModel.GetLatLongReportStatus());
+
+            filter=new EventFilter<SendDataTextEventsArgs>(30);
+            filter.FilteredEventRaised+=(sender, args) => PrintEventText(args.Data,args.Text);
         }
 
         /// <summary>
@@ -251,8 +257,12 @@ namespace SensorDiagnosticTool
 
                 // Log event
                 Guid guidSensor = sensor.SensorID;
-                DisplayEventString(String.Format(CultureInfo.CurrentUICulture, m_resourceManager.GetString("EnterEventUI"), m_sensorDictionary[guidSensor].FriendlyName));
-                SensorModel.LogReport(String.Format(CultureInfo.InvariantCulture, m_resourceManager.GetString("EnterEventXML"), m_sensorDictionary[guidSensor].FriendlyName));
+                DisplayEventString(String.Format(CultureInfo.CurrentUICulture,
+                                                 m_resourceManager.GetString("EnterEventUI"),
+                                                 m_sensorDictionary[guidSensor].FriendlyName));
+                SensorModel.LogReport(String.Format(CultureInfo.InvariantCulture,
+                                                    m_resourceManager.GetString("EnterEventXML"),
+                                                    m_sensorDictionary[guidSensor].FriendlyName));
             }
         }
 
@@ -355,8 +365,10 @@ namespace SensorDiagnosticTool
                     s.Sensor = null;
 
                     // Log event
-                    DisplayEventString(String.Format(CultureInfo.CurrentUICulture, m_resourceManager.GetString("LeaveEventUI"), s.FriendlyName));
-                    SensorModel.LogReport(String.Format(CultureInfo.InvariantCulture, m_resourceManager.GetString("LeaveEventXML"), s.FriendlyName));
+                    DisplayEventString(String.Format(CultureInfo.CurrentUICulture,
+                                                     m_resourceManager.GetString("LeaveEventUI"), s.FriendlyName));
+                    SensorModel.LogReport(String.Format(CultureInfo.InvariantCulture,
+                                                        m_resourceManager.GetString("LeaveEventXML"), s.FriendlyName));
                 }
 
                 // The SensorModel in sensorDictionary persists so the log information can be kept and written later
@@ -374,12 +386,14 @@ namespace SensorDiagnosticTool
                 if (null != treeViewSensors.SelectedNode)
                 {
                     // Refresh grids and show log if this sensor is selected
-                    if (NODE_LATLONG == treeViewSensors.SelectedNode.Name || NODE_CIVICADDRESS == treeViewSensors.SelectedNode.Name)
+                    if (NODE_LATLONG == treeViewSensors.SelectedNode.Name ||
+                        NODE_CIVICADDRESS == treeViewSensors.SelectedNode.Name)
                     {
                         if (showEventsToolStripMenuItem.Checked)
                         {
                             RefreshGrids(treeViewSensors.SelectedNode);
-                            DisplayEventString(String.Format(CultureInfo.CurrentUICulture, m_resourceManager.GetString("LocationChangedEventUI")));
+                            DisplayEventString(String.Format(CultureInfo.CurrentUICulture,
+                                                             m_resourceManager.GetString("LocationChangedEventUI")));
                         }
                     }
                 }
@@ -400,12 +414,15 @@ namespace SensorDiagnosticTool
                 if (null != treeViewSensors.SelectedNode)
                 {
                     // Refresh grids and show log if this sensor is selected
-                    if (NODE_LATLONG == treeViewSensors.SelectedNode.Name || NODE_CIVICADDRESS == treeViewSensors.SelectedNode.Name)
+                    if (NODE_LATLONG == treeViewSensors.SelectedNode.Name ||
+                        NODE_CIVICADDRESS == treeViewSensors.SelectedNode.Name)
                     {
                         if (showEventsToolStripMenuItem.Checked)
                         {
                             RefreshGrids(treeViewSensors.SelectedNode);
-                            DisplayEventString(String.Format(CultureInfo.CurrentUICulture, m_resourceManager.GetString("LocationStatusChangedEventUI"), SensorModel.GetReportStatus(newStatus)));
+                            DisplayEventString(String.Format(CultureInfo.CurrentUICulture,
+                                                             m_resourceManager.GetString("LocationStatusChangedEventUI"),
+                                                             SensorModel.GetReportStatus(newStatus)));
                         }
                     }
                 }
@@ -421,43 +438,49 @@ namespace SensorDiagnosticTool
         /// <param name="str">String to be displayed.</param>
         private void DisplayEventString(string data)
         {
-            if (showEventsToolStripMenuItem.Checked)
+            string tempText = textBoxEvents.Text;
+            var args = new SendDataTextEventsArgs(data, tempText);
+            filter.HandleOriginalEvent(this, args);
+        }
+
+        private EventFilter<SendDataTextEventsArgs> filter;
+
+        private void PrintEventText(string data, string tempText)
+        {
+            if (!showEventsToolStripMenuItem.Checked)
+                return;
+            data = String.Format(
+                CultureInfo.CurrentUICulture,
+                m_resourceManager.GetString("StringUI"),
+                System.DateTime.Now.ToString(Constants.TIME_FORMAT, CultureInfo.CurrentUICulture.DateTimeFormat),
+                data);
+            data += Environment.NewLine;
+
+            // Shorten stored text so fits within MaxLength of the text box
+            while (tempText.Length + data.Length > textBoxEvents.MaxLength)
             {
-                string tempText = textBoxEvents.Text;
-
-                data = String.Format(
-                    CultureInfo.CurrentUICulture,
-                    m_resourceManager.GetString("StringUI"),
-                    System.DateTime.Now.ToString(Constants.TIME_FORMAT, CultureInfo.CurrentUICulture.DateTimeFormat),
-                    data);
-                data += Environment.NewLine;
-
-                // Shorten stored text so fits within MaxLength of the text box
-                while (tempText.Length + data.Length > textBoxEvents.MaxLength)
+                int newLineIndex = tempText.IndexOf(Environment.NewLine);
+                if (newLineIndex > -1)
                 {
-                    int newLineIndex = tempText.IndexOf(Environment.NewLine);
-                    if (newLineIndex > -1)
+                    tempText = tempText.Substring(newLineIndex + 1);
+                }
+                else
+                {
+                    // Could not find newline, overwrite all of the text box
+                    tempText = "";
+                    if (data.Length > textBoxEvents.MaxLength)
                     {
-                        tempText = tempText.Substring(newLineIndex + 1);
-                    }
-                    else
-                    {
-                        // Could not find newline, overwrite all of the text box
-                        tempText = "";
-                        if (data.Length > textBoxEvents.MaxLength)
-                        {
-                            data = data.Substring(0, textBoxEvents.MaxLength);
-                        }
+                        data = data.Substring(0, textBoxEvents.MaxLength);
                     }
                 }
-
-                textBoxEvents.Text = tempText + data;
-
-                // Scroll to bottom of textBox so newest event is viewable
-                textBoxEvents.SelectionStart = textBoxEvents.TextLength;
-                textBoxEvents.SelectionLength = 0;
-                textBoxEvents.ScrollToCaret();
             }
+
+            textBoxEvents.Text = tempText + data;
+
+            // Scroll to bottom of textBox so newest event is viewable
+            textBoxEvents.SelectionStart = textBoxEvents.TextLength;
+            textBoxEvents.SelectionLength = 0;
+            textBoxEvents.ScrollToCaret();
         }
 
         private void launchControlPanelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -487,9 +510,12 @@ namespace SensorDiagnosticTool
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.OverwritePrompt = true;
 
-            dialog.FileName = String.Format(CultureInfo.InvariantCulture, m_resourceManager.GetString("SensorLogFileName"));
+            dialog.FileName = String.Format(CultureInfo.InvariantCulture,
+                                            m_resourceManager.GetString("SensorLogFileName"));
             dialog.DefaultExt = "xml";
-            dialog.Filter = String.Format(CultureInfo.InvariantCulture, m_resourceManager.GetString("SensorLogFilterText")) + " (*.xml)|*.xml";
+            dialog.Filter =
+                String.Format(CultureInfo.InvariantCulture, m_resourceManager.GetString("SensorLogFilterText")) +
+                " (*.xml)|*.xml";
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -518,6 +544,28 @@ namespace SensorDiagnosticTool
                     fs.Close();
                 }
             }
+        }
+    }
+
+    internal class SendDataTextEventsArgs : EventArgs
+    {
+        private readonly string _data;
+        private readonly string _text;
+
+        public SendDataTextEventsArgs(string data, string text)
+        {
+            _data = data;
+            _text = text;
+        }
+
+        public string Data
+        {
+            get { return _data; }
+        }
+
+        public string Text
+        {
+            get { return _text; }
         }
     }
 }
