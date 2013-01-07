@@ -1,20 +1,31 @@
 ﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
-using Windows7.Sensors.Internal;
 using Windows7.Sensors;
+using Windows7.Sensors.Internal;
 
 namespace Windows7.Location.Internal
 {
     /// <summary>
-    /// Creates a lat long location report for the specified data.  Used to set the default location.
+    ///     Creates a lat long location report for the specified data.  Used to set the default location.
     /// </summary>
     internal class DefaultLatLongReport : ILatLongReport
     {
+        readonly double _altitude;
+        readonly double _altitudeError;
+        readonly double _errorRadius;
+        readonly double _latitude;
+        readonly double _longitude;
+        readonly SYSTEMTIME _timeStamp;
+
         /// <summary>
-        /// Initializes the position report.
+        ///     Initializes the position report.
         /// </summary>
-        public DefaultLatLongReport(double latitude, double longitude, double errorRadius, double altitude, double altitudeError)
+        public DefaultLatLongReport(double latitude,
+                                    double longitude,
+                                    double errorRadius,
+                                    double altitude,
+                                    double altitudeError)
         {
             _latitude = latitude;
             _longitude = longitude;
@@ -25,7 +36,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Return the sensor ID for the default location provider.
+        ///     Return the sensor ID for the default location provider.
         /// </summary>
         public Guid GetSensorID()
         {
@@ -33,7 +44,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the age of the data.
+        ///     Gets the age of the data.
         /// </summary>
         public SYSTEMTIME GetTimestamp()
         {
@@ -41,7 +52,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the specified property value.
+        ///     Gets the specified property value.
         /// </summary>
         /// <param name="pKey">The key of the requested property.</param>
         public void GetValue(ref PropertyKey pKey, out PROPVARIANT pValue)
@@ -74,7 +85,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the latitude.
+        ///     Gets the latitude.
         /// </summary>
         public double GetLatitude()
         {
@@ -82,7 +93,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the longitude.
+        ///     Gets the longitude.
         /// </summary>
         public double GetLongitude()
         {
@@ -90,7 +101,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the error radius.
+        ///     Gets the error radius.
         /// </summary>
         public double GetErrorRadius()
         {
@@ -98,7 +109,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the altitude.
+        ///     Gets the altitude.
         /// </summary>
         public double GetAltitude()
         {
@@ -106,18 +117,11 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the altitude error.
+        ///     Gets the altitude error.
         /// </summary>
         public double GetAltitudeError()
         {
             return _altitudeError;
         }
-
-        private double _latitude;
-        private double _longitude;
-        private double _errorRadius;
-        private double _altitude;
-        private double _altitudeError;
-        private SYSTEMTIME _timeStamp;
     }
 }

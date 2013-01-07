@@ -3,105 +3,30 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Windows7.Sensors.Internal;
 using System.Runtime.InteropServices;
-
+using Windows7.Sensors.Internal;
 
 
 namespace Windows7.Sensors
 {
+
     #region Helper types
 
-    /// <summary>
-    /// Structure containing the property ID (key) and value.
-    /// </summary>
-    public struct DataFieldInfo : IEquatable<DataFieldInfo>
-    {
-        private PropertyKey _propKey;
-        private object _value;
-
-        /// <summary>
-        /// Constructs the structure.
-        /// </summary>
-        /// <param name="propKey">Property ID (key).</param>
-        /// <param name="value">Property value. Type must be valid for the ID.</param>
-        public DataFieldInfo(PropertyKey propKey, object value)
-        {
-            _propKey = propKey;
-            _value = value;
-        }
-
-        /// <summary>
-        /// Returns the property key.
-        /// </summary>
-        public PropertyKey Key
-        {
-            get { return _propKey; }
-        }
-
-        /// <summary>
-        /// Returns property's value.
-        /// </summary>
-        public object Value
-        {
-            get { return _value; }
-        }
-
-        public override int GetHashCode()
-        {
-            int valHashCode = _value != null ? _value.GetHashCode() : 0;
-            return _propKey.GetHashCode() ^ valHashCode;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            if (!(obj is DataFieldInfo))
-                return false;
-
-            DataFieldInfo other = (DataFieldInfo)obj;
-            return _value.Equals(other._value) && _propKey.Equals(other._propKey);
-        }
-
-
-
-        #region IEquatable<DataFieldInfo> Members
-
-        public bool Equals(DataFieldInfo other)
-        {
-            return _value.Equals(other._value) && _propKey.Equals(other._propKey);
-        }
-
-        #endregion
-
-        public static bool operator ==(DataFieldInfo a, DataFieldInfo b)
-        {
-            return a.Equals(b);
-        }
-
-        public static bool operator !=(DataFieldInfo a, DataFieldInfo b)
-        {
-            return !a.Equals(b);
-        }
-    }
-
     #endregion
-    
+
     /// <summary>
-    /// Represents a sensor. Exposes events and properties. Derived types may provide more events and properties. 
+    ///     Represents a sensor. Exposes events and properties. Derived types may provide more events and properties.
     /// </summary>
     public abstract class Sensor : ISensorEvents
     {
         #region Private fields
 
-        private ISensor _iSensor;
-        private static Dictionary<Sensor, bool> _instances = new Dictionary<Sensor, bool>();
-        private ISensorDataReport _lastReport;
+        static readonly Dictionary<Sensor, bool> _instances = new Dictionary<Sensor, bool>();
+        ISensor _iSensor;
+        ISensorDataReport _lastReport;
 
         #endregion
-                
+
         #region Events
 
         public event SensorLeaveEventHandler SensorLeave;
@@ -114,7 +39,7 @@ namespace Windows7.Sensors
         #region Constructor
 
         /// <summary>
-        /// Constructs the sensor instance.
+        ///     Constructs the sensor instance.
         /// </summary>
         protected Sensor()
         {
@@ -136,11 +61,11 @@ namespace Windows7.Sensors
         #endregion
 
         #region Public properties
-        
+
         /// <summary>
-        /// Returns the sensor instance GUID.
+        ///     Returns the sensor instance GUID.
         /// </summary>
-        public Guid SensorID
+        public Guid SensorId
         {
             get
             {
@@ -151,9 +76,9 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Returns the sensor category GUID.
+        ///     Returns the sensor category GUID.
         /// </summary>
-        public Guid CategoryID
+        public Guid CategoryId
         {
             get
             {
@@ -164,9 +89,9 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Returns the sensor type GUID.
+        ///     Returns the sensor type GUID.
         /// </summary>
-        public Guid TypeID
+        public Guid TypeId
         {
             get
             {
@@ -177,20 +102,20 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Returns the sensor's friendly name.
+        ///     Returns the sensor's friendly name.
         /// </summary>
         public string FriendlyName
         {
             get
             {
-                string name = null;
+                string name;
                 _iSensor.GetFriendlyName(out name);
                 return name;
             }
         }
 
         /// <summary>
-        /// Returns the sensor's current state.
+        ///     Returns the sensor's current state.
         /// </summary>
         public SensorState State
         {
@@ -203,122 +128,93 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Gets or sets the report interval.
+        ///     Gets or sets the report interval.
         /// </summary>
         public uint ReportInterval
         {
-            get
-            {
-                return (uint)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL);
-            }
+            get { return (uint) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL); }
 
             set
             {
-                SetProperties(new DataFieldInfo[] { new DataFieldInfo(SensorPropertyKeys.SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL, value) });
+                SetProperties(new[]
+                                  {new DataFieldInfo(SensorPropertyKeys.SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL, value)});
             }
         }
 
         /// <summary>
-        /// Gets the minimal report interval.
+        ///     Gets the minimal report interval.
         /// </summary>
         public uint MinReportInterval
         {
-            get
-            {
-                return (uint)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_MIN_REPORT_INTERVAL);
-            }
+            get { return (uint) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_MIN_REPORT_INTERVAL); }
         }
 
         /// <summary>
-        /// Gets the manufactorer of the sensor.
+        ///     Gets the manufactorer of the sensor.
         /// </summary>
         public string SensorManufacturer
         {
-            get
-            {
-                return (string)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_MANUFACTURER);
-            }
+            get { return (string) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_MANUFACTURER); }
         }
 
         /// <summary>
-        /// Gets the sensor model.
+        ///     Gets the sensor model.
         /// </summary>
         public string SensorModel
         {
-            get
-            {
-                return (string)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_MODEL);
-            }
+            get { return (string) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_MODEL); }
         }
 
         /// <summary>
-        /// Gets the sensor's serial number.
+        ///     Gets the sensor's serial number.
         /// </summary>
         public string SensorSerialNumber
         {
-            get
-            {
-                return (string)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_SERIAL_NUMBER);
-            }
+            get { return (string) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_SERIAL_NUMBER); }
         }
 
         /// <summary>
-        /// Gets the sensor's description.
+        ///     Gets the sensor's description.
         /// </summary>
         public string SensorDescription
         {
-            get
-            {
-                return (string)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_DESCRIPTION);
-            }
+            get { return (string) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_DESCRIPTION); }
         }
 
         /// <summary>
-        /// Gets the sensor's connection type.
+        ///     Gets the sensor's connection type.
         /// </summary>
         public uint SensorConnectionType
         {
-            get
-            {
-                return (uint)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_CONNECTION_TYPE);
-            }
+            get { return (uint) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_CONNECTION_TYPE); }
         }
 
         /// <summary>
-        /// Gets or sets the sensor's change sensitivity
+        ///     Gets or sets the sensor's change sensitivity
         /// </summary>
         public uint ChangeSensitivity
         {
-            get
-            {
-                return (uint)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_CHANGE_SENSITIVITY);
-            }
-            set
-            {
-                SetProperties(new DataFieldInfo[] { new DataFieldInfo(SensorPropertyKeys.SENSOR_PROPERTY_CHANGE_SENSITIVITY, value) });
-            }
+            get { return (uint) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_CHANGE_SENSITIVITY); }
+            set { SetProperties(new[] {new DataFieldInfo(SensorPropertyKeys.SENSOR_PROPERTY_CHANGE_SENSITIVITY, value)}); }
         }
 
         /// <summary>
-        /// Gets the sensor device path
+        ///     Gets the sensor device path
         /// </summary>
         public string SensorDevicePath
         {
-            get
-            {
-                return (string)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_DEVICE_ID);
-            }
+            get { return (string) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_DEVICE_ID); }
         }
 
         /// <summary>
-        /// Gets sensor accuracy values.
+        ///     Gets sensor accuracy values.
         /// </summary>
         public /*PropertyKey[] */ int SensorAccuracy
         {
             get
             {
                 //IPortableDeviceKeyCollection collection = (IPortableDeviceKeyCollection) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_ACCURACY);
-                
+
                 //uint nItems = 0;
                 //collection.GetCount(out nItems);
                 //PropertyKey[] dataFields = new PropertyKey[nItems];
@@ -332,12 +228,12 @@ namespace Windows7.Sensors
 
                 //return dataFields;
 
-                return (int)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_ACCURACY);
+                return (int) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_ACCURACY);
             }
         }
 
         /// <summary>
-        /// Gets sensor resolution values.
+        ///     Gets sensor resolution values.
         /// </summary>
         public /*PropertyKey[] */ int SensorResolution
         {
@@ -358,19 +254,16 @@ namespace Windows7.Sensors
 
                 //return dataFields;
 
-                return (int)GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_RESOLUTION);
+                return (int) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_RESOLUTION);
             }
         }
 
         /// <summary>
-        /// Gets an array representing the light response curve.
+        ///     Gets an array representing the light response curve.
         /// </summary>
         public /*uint[]*/ int LightResponseCurve
         {
-            get
-            {
-                return /*(uint[])*/ (int) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_LIGHT_RESPONSE_CURVE);
-            }
+            get { return /*(uint[])*/ (int) GetProperty(SensorPropertyKeys.SENSOR_PROPERTY_LIGHT_RESPONSE_CURVE); }
         }
 
         #endregion
@@ -378,7 +271,7 @@ namespace Windows7.Sensors
         #region Public methods
 
         /// <summary>
-        /// Synchronously retrieves a data report from the sensor.
+        ///     Synchronously retrieves a data report from the sensor.
         /// </summary>
         /// <returns>Data report.</returns>
         public SensorDataReport GetDataReport()
@@ -389,7 +282,7 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Retrieves the last data report asynchronously received from the sensor. Otherwise, returns null.
+        ///     Retrieves the last data report asynchronously received from the sensor. Otherwise, returns null.
         /// </summary>
         /// <returns>Data report or null.</returns>
         public SensorDataReport GetLastAsyncDataReport()
@@ -399,9 +292,9 @@ namespace Windows7.Sensors
                 return null;
             return GetDataReport(lastRep, _iSensor);
         }
-                
+
         /// <summary>
-        /// Returns the details of supported properties.
+        ///     Returns the details of supported properties.
         /// </summary>
         /// <returns>Array of supported data fields.</returns>
         public PropertyKey[] GetSupportedDataFields()
@@ -411,7 +304,7 @@ namespace Windows7.Sensors
 
             uint nItems = 0;
             keyCollection.GetCount(out nItems);
-            PropertyKey[] dataFields = new PropertyKey[nItems];
+            var dataFields = new PropertyKey[nItems];
 
             for (uint i = 0; i < nItems; i++)
             {
@@ -424,7 +317,7 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Returns whether the sensor supports the given data field.
+        ///     Returns whether the sensor supports the given data field.
         /// </summary>
         /// <param name="field">Property ID to check.</param>
         /// <returns>true if supported. false otherwise.</returns>
@@ -436,7 +329,7 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Returns whether the sensor supports the given event.
+        ///     Returns whether the sensor supports the given event.
         /// </summary>
         /// <param name="eventGuid">The event GUID.</param>
         /// <returns>true if supported. false otherwise.</returns>
@@ -448,13 +341,13 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Retrieves a property value by property key.
+        ///     Retrieves a property value by property key.
         /// </summary>
         /// <param name="propKey">Property key.</param>
         /// <returns>Property's value.</returns>
         public object GetProperty(PropertyKey propKey)
         {
-            PROPVARIANT propVariant = new PROPVARIANT();
+            var propVariant = new PROPVARIANT();
             try
             {
                 _iSensor.GetProperty(ref propKey, out propVariant);
@@ -467,19 +360,19 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Retrieves a property value by property inex.
-        /// Assumes the GUID component in the property key takes the sensor's type GUID.
+        ///     Retrieves a property value by property inex.
+        ///     Assumes the GUID component in the property key takes the sensor's type GUID.
         /// </summary>
         /// <param name="propKey">Property index.</param>
         /// <returns>Property's value.</returns>
         public object GetProperty(int propIdx)
         {
-            PropertyKey propKey = PropertyKey.Create(this.TypeID, propIdx);
+            PropertyKey propKey = PropertyKey.Create(TypeId, propIdx);
             return GetProperty(propKey);
         }
 
         /// <summary>
-        /// Retrives the values of multiple properties.
+        ///     Retrives the values of multiple properties.
         /// </summary>
         /// <param name="propKeys">Properties to retrieve.</param>
         /// <returns>A dictionary containing the property keys and values.</returns>
@@ -501,7 +394,7 @@ namespace Windows7.Sensors
 
                 _iSensor.GetProperties(keyCollection, out valuesCollection);
 
-                Dictionary<PropertyKey, object> data = new Dictionary<PropertyKey, object>();
+                var data = new Dictionary<PropertyKey, object>();
 
                 if (valuesCollection == null)
                     return data;
@@ -511,8 +404,8 @@ namespace Windows7.Sensors
 
                 for (uint i = 0; i < count; i++)
                 {
-                    PropertyKey propKey = new PropertyKey();
-                    PROPVARIANT propVal = new PROPVARIANT();
+                    var propKey = new PropertyKey();
+                    var propVal = new PROPVARIANT();
                     valuesCollection.GetAt(i, ref propKey, out propVal);
 
                     try
@@ -534,7 +427,7 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Retrives the values of multiple properties.
+        ///     Retrives the values of multiple properties.
         /// </summary>
         /// <param name="propKeys">Properties to retrieve.</param>
         /// <returns>A dictionary containing the property keys and values.</returns>
@@ -544,7 +437,7 @@ namespace Windows7.Sensors
 
             _iSensor.GetProperties(null, out valuesCollection);
 
-            Dictionary<PropertyKey, object> data = new Dictionary<PropertyKey, object>();
+            var data = new Dictionary<PropertyKey, object>();
 
             if (valuesCollection == null)
                 return data;
@@ -554,8 +447,8 @@ namespace Windows7.Sensors
 
             for (uint i = 0; i < count; i++)
             {
-                PropertyKey propKey = new PropertyKey();
-                PROPVARIANT propVal = new PROPVARIANT();
+                var propKey = new PropertyKey();
+                var propVal = new PROPVARIANT();
                 valuesCollection.GetAt(i, ref propKey, out propVal);
 
                 try
@@ -572,13 +465,13 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Retrives the values of multiple properties by their indices.
-        /// Assues that the GUID component of property keys is the sensor's type GUID.
+        ///     Retrives the values of multiple properties by their indices.
+        ///     Assues that the GUID component of property keys is the sensor's type GUID.
         /// </summary>
         /// <param name="propIndices">Indices of properties to retrieve.</param>
         /// <returns>An array containing the property values.</returns>
         /// <remarks>
-        /// If the values of some properties could not be retrieved, then the returned array will contain null values in the corresponding positions.
+        ///     If the values of some properties could not be retrieved, then the returned array will contain null values in the corresponding positions.
         /// </remarks>
         public object[] GetProperties(params int[] propIndices)
         {
@@ -589,28 +482,28 @@ namespace Windows7.Sensors
             try
             {
                 IPortableDeviceValues valuesCollection;
-                Dictionary<PropertyKey, int> propKeyToIdx = new Dictionary<PropertyKey, int>();
+                var propKeyToIdx = new Dictionary<PropertyKey, int>();
 
                 for (int i = 0; i < propIndices.Length; i++)
                 {
-                    PropertyKey propKey = PropertyKey.Create(this.TypeID, propIndices[i]);
+                    PropertyKey propKey = PropertyKey.Create(TypeId, propIndices[i]);
                     keyCollection.Add(ref propKey);
                     propKeyToIdx.Add(propKey, i);
                 }
 
-                object[] data = new object[propIndices.Length];
+                var data = new object[propIndices.Length];
                 _iSensor.GetProperties(keyCollection, out valuesCollection);
 
                 if (valuesCollection == null)
                     return data;
 
                 uint count = 0;
-                valuesCollection.GetCount(ref count);             
+                valuesCollection.GetCount(ref count);
 
                 for (uint i = 0; i < count; i++)
                 {
-                    PropertyKey propKey = new PropertyKey();
-                    PROPVARIANT propVal = new PROPVARIANT();
+                    var propKey = new PropertyKey();
+                    var propVal = new PROPVARIANT();
                     valuesCollection.GetAt(i, ref propKey, out propVal);
 
                     try
@@ -631,14 +524,14 @@ namespace Windows7.Sensors
                 Marshal.ReleaseComObject(keyCollection);
             }
         }
-        
+
         /// <summary>
-        /// Sets the values of multiple properties.
+        ///     Sets the values of multiple properties.
         /// </summary>
         /// <param name="data">The keys and values of properties to set.</param>
         /// <returns>The new values of the properties. Actual values may not match requested values.</returns>
         public IDictionary<PropertyKey, object> SetProperties(DataFieldInfo[] data)
-        {        
+        {
             if (data == null || data.Length == 0)
                 throw new ArgumentNullException("data", "Data field array must not be null or empty.");
 
@@ -652,39 +545,39 @@ namespace Windows7.Sensors
                     throw new ArgumentNullException("data", String.Format("Data contains a null value at index {0}", i));
 
                 if (value is string)
-                    pdv.SetStringValue(ref propKey, (string)value);
+                    pdv.SetStringValue(ref propKey, (string) value);
                 else if (value is uint)
-                    pdv.SetUnsignedIntegerValue(ref propKey, (uint)value);
+                    pdv.SetUnsignedIntegerValue(ref propKey, (uint) value);
                 else if (value is int)
-                    pdv.SetSignedIntegerValue(ref propKey, (int)value);
+                    pdv.SetSignedIntegerValue(ref propKey, (int) value);
                 else if (value is ulong)
-                    pdv.SetUnsignedLargeIntegerValue(ref propKey, (ulong)value);
+                    pdv.SetUnsignedLargeIntegerValue(ref propKey, (ulong) value);
                 else if (value is long)
-                    pdv.SetSignedLargeIntegerValue(ref propKey, (long)value);
+                    pdv.SetSignedLargeIntegerValue(ref propKey, (long) value);
                 else if (value is float || value is double)
-                    pdv.SetFloatValue(ref propKey, (float)value);
+                    pdv.SetFloatValue(ref propKey, (float) value);
                 else if (value is bool)
-                    pdv.SetBoolValue(ref propKey, ((bool)value) ? 1 : 0);
+                    pdv.SetBoolValue(ref propKey, ((bool) value) ? 1 : 0);
                 else if (value is Guid)
                 {
-                    Guid guid = (Guid) value;
+                    var guid = (Guid) value;
                     pdv.SetGuidValue(ref propKey, ref guid);
                 }
                 else if (value is byte[])
                 {
-                    byte[] buffer = (byte[])value;
-                    pdv.SetBufferValue(ref propKey, buffer, (uint)buffer.Length);
+                    var buffer = (byte[]) value;
+                    pdv.SetBufferValue(ref propKey, buffer, (uint) buffer.Length);
                 }
                 else
                 {
                     pdv.SetIUnknownValue(ref propKey, value);
                 }
             }
-            
+
             IPortableDeviceValues pdv2 = null;
             _iSensor.SetProperties(pdv, out pdv2);
 
-            Dictionary<PropertyKey, object> results = new Dictionary<PropertyKey, object>();
+            var results = new Dictionary<PropertyKey, object>();
 
             if (pdv2 == null)
                 return results;
@@ -694,8 +587,8 @@ namespace Windows7.Sensors
 
             for (uint i = 0; i < count; i++)
             {
-                PropertyKey propKey = new PropertyKey();
-                PROPVARIANT propVal = new PROPVARIANT();
+                var propKey = new PropertyKey();
+                var propVal = new PROPVARIANT();
                 try
                 {
                     pdv2.GetAt(i, ref propKey, out propVal);
@@ -711,7 +604,7 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Registers for the specified events by GUIDs.
+        ///     Registers for the specified events by GUIDs.
         /// </summary>
         /// <param name="eventGuids">Events to register.</param>
         public void SetEventInterest(Guid[] eventGuids)
@@ -719,11 +612,11 @@ namespace Windows7.Sensors
             if (eventGuids == null || eventGuids.Length == 0)
                 throw new ArgumentNullException("eventGuids", "Event GUIDs array must no be null or empty.");
 
-            _iSensor.SetEventInterest(eventGuids, (uint)eventGuids.Length);
+            _iSensor.SetEventInterest(eventGuids, (uint) eventGuids.Length);
         }
 
         /// <summary>
-        /// Retrieves the currently registeredevents.
+        ///     Retrieves the currently registeredevents.
         /// </summary>
         /// <returns></returns>
         public Guid[] GetEventInterest()
@@ -739,9 +632,9 @@ namespace Windows7.Sensors
         #endregion
 
         #region Internal methods
-                
+
         /// <summary>
-        /// Creates a data report instance appropirate for the sensor.
+        ///     Creates a data report instance appropirate for the sensor.
         /// </summary>
         /// <param name="report">Underlying data report COM object.</param>
         /// <param name="sensor">Sensor COM object.</param>
@@ -754,8 +647,8 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Allows calling <see cref="Sensor.Initialize"/> internally without making it public.
-        /// Sets event sink.
+        ///     Allows calling <see cref="Sensor.Initialize" /> internally without making it public.
+        ///     Sets event sink.
         /// </summary>
         /// <param name="iSensor">Sensor COM object.</param>
         internal void InitializeSensor(ISensor iSensor)
@@ -764,18 +657,18 @@ namespace Windows7.Sensors
             _iSensor.SetEventSink(this);
             Initialize();
         }
-        
+
         #endregion
 
         #region Protected methods
 
         /// <summary>
-        /// When overriden by derived types, provides a point where initializations which require access to the sensor can be performed.
+        ///     When overriden by derived types, provides a point where initializations which require access to the sensor can be performed.
         /// </summary>
         protected abstract void Initialize();
 
         /// <summary>
-        /// When overriden by derived types, creates a data report object appropriate for the sensor.
+        ///     When overriden by derived types, creates a data report object appropriate for the sensor.
         /// </summary>
         /// <returns></returns>
         protected abstract SensorDataReport CreateReport();
@@ -785,7 +678,7 @@ namespace Windows7.Sensors
         #region Internal event handlers Members
 
         /// <summary>
-        /// Handler of the state changed event. Fires the <see cref="StateChanged"/> event.
+        ///     Handler of the state changed event. Fires the <see cref="StateChanged" /> event.
         /// </summary>
         /// <param name="sensor">COM sensor object for which this event was fired.</param>
         /// <param name="state">Sensor's new state.</param>
@@ -796,8 +689,8 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Handler of the data updated event. Fires the <see cref="DataUpdated"/> event.
-        /// Creates an appropriate data report object.
+        ///     Handler of the data updated event. Fires the <see cref="DataUpdated" /> event.
+        ///     Creates an appropriate data report object.
         /// </summary>
         /// <param name="sensor">COM sensor object for which this event was fired.</param>
         /// <param name="newData">COM data report object.</param>
@@ -812,31 +705,31 @@ namespace Windows7.Sensors
         }
 
         /// <summary>
-        /// Handler for any event. Fires the <see cref="EventReceived"/> event.
+        ///     Handler for any event. Fires the <see cref="EventReceived" /> event.
         /// </summary>
         /// <param name="sensor">COM sensor object for which this event was fired.</param>
-        /// <param name="eventID">Event GUID.</param>
+        /// <param name="eventId">Event GUID.</param>
         /// <param name="newData">COM data report object.</param>
-        void ISensorEvents.OnEvent(ISensor sensor, Guid eventID, ISensorDataReport newData)
+        void ISensorEvents.OnEvent(ISensor sensor, Guid eventId, ISensorDataReport newData)
         {
             if (EventReceived != null)
             {
                 SensorDataReport sdr = GetDataReport(newData, sensor);
-                EventReceived(this, eventID, sdr);
+                EventReceived(this, eventId, sdr);
             }
         }
 
         /// <summary>
-        /// Handler of an event indicating cesation of sensor availability.
+        ///     Handler of an event indicating cesation of sensor availability.
         /// </summary>
-        /// <param name="sensorID">Sensor's instance GUID.</param>
-        void ISensorEvents.OnLeave(Guid sensorID)
-        {          
+        /// <param name="sensorId">Sensor's instance GUID.</param>
+        void ISensorEvents.OnLeave(Guid sensorId)
+        {
             _iSensor = null;
             _lastReport = null;
-            
+
             if (SensorLeave != null)
-                SensorLeave(this, sensorID);
+                SensorLeave(this, sensorId);
 
             lock (_instances)
             {

@@ -81,6 +81,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendDataTextEventsArgs.cs" />
+    <Compile Include="SensorErrors.cs" />
+    <Compile Include="SensorErrorValues.cs" />
+    <Compile Include="SensorXML.cs" />
+    <Compile Include="WPDPropertyKeys.cs" />
     <EmbeddedResource Include="FormDiagTool.resx">
       <DependentUpon>FormDiagTool.cs</DependentUpon>
       <SubType>Designer</SubType>

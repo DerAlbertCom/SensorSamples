@@ -1,34 +1,41 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 
+using System;
+
 namespace Windows7.Sensors
 {
     /// <summary>
-    /// Represents the state of the sensor device.
+    ///     Represents the state of the sensor device.
     /// </summary>
     public enum SensorState
     {
         /// <summary>
-        /// The device is ready.
+        ///     The device is ready.
         /// </summary>
         Ready = 0,
+
         /// <summary>
-        /// The device is not available.
+        ///     The device is not available.
         /// </summary>
         NotAvailable = 1,
+
         /// <summary>
-        /// No data is available.
+        ///     No data is available.
         /// </summary>
         NoData,
+
         /// <summary>
-        /// The device is initializing.
+        ///     The device is initializing.
         /// </summary>
         Initializing,
+
         /// <summary>
-        /// No permissions exist to access the device.
+        ///     No permissions exist to access the device.
         /// </summary>
         AccessDenied,
+
         /// <summary>
-        /// The device has encountered an error.
+        ///     The device has encountered an error.
         /// </summary>
         Error
     }

@@ -1,9 +1,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 
+using System;
+
 namespace Windows7.Sensors.Sensors.Light
 {
     /// <summary>
-    /// Represents an ambient light sensor.
+    ///     Represents an ambient light sensor.
     /// </summary>
     [SensorDescription("97F115C8-599A-4153-8894-D2D12899918A")]
     public class AmbientLightSensor : Sensor

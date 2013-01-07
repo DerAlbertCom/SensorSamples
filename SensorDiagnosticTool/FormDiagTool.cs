@@ -151,24 +151,24 @@ namespace SensorDiagnosticTool
             sensor.SensorLeave += new SensorLeaveEventHandler(LeaveHandler);
 
             TreeNode treeNodeSensor = new TreeNode(sensor.FriendlyName);
-            treeNodeSensor.Name = sensor.SensorID.ToString();
+            treeNodeSensor.Name = sensor.SensorId.ToString();
             nodeSensors.Nodes.Add(treeNodeSensor);
 
-            if (!m_sensorDictionary.ContainsKey(sensor.SensorID))
+            if (!m_sensorDictionary.ContainsKey(sensor.SensorId))
             {
                 // Add sensor if this is first time seen
-                m_sensorDictionary[sensor.SensorID] = new SensorModel(sensor);
+                m_sensorDictionary[sensor.SensorId] = new SensorModel(sensor);
             }
             else
             {
                 // update sensor pointer if sensor is returning
-                m_sensorDictionary[sensor.SensorID].Sensor = sensor;
+                m_sensorDictionary[sensor.SensorId].Sensor = sensor;
             }
 
             try
             {
-                m_sensorDictionary[sensor.SensorID].LogReport(sensor.State);
-                m_sensorDictionary[sensor.SensorID].LogReport(sensor.GetDataReport());
+                m_sensorDictionary[sensor.SensorId].LogReport(sensor.State);
+                m_sensorDictionary[sensor.SensorId].LogReport(sensor.GetDataReport());
             }
             catch (COMException ex)
             {
@@ -256,7 +256,7 @@ namespace SensorDiagnosticTool
                 AddSensorToTree(sensor);
 
                 // Log event
-                Guid guidSensor = sensor.SensorID;
+                Guid guidSensor = sensor.SensorId;
                 DisplayEventString(String.Format(CultureInfo.CurrentUICulture,
                                                  m_resourceManager.GetString("EnterEventUI"),
                                                  m_sensorDictionary[guidSensor].FriendlyName));
@@ -274,7 +274,7 @@ namespace SensorDiagnosticTool
             }
             else
             {
-                Guid guidSensor = sensor.SensorID;
+                Guid guidSensor = sensor.SensorId;
 
                 if (null != treeViewSensors.SelectedNode)
                 {
@@ -309,7 +309,7 @@ namespace SensorDiagnosticTool
             }
             else
             {
-                Guid guidSensor = sensor.SensorID;
+                Guid guidSensor = sensor.SensorId;
 
                 if (null != treeViewSensors.SelectedNode)
                 {
@@ -544,28 +544,6 @@ namespace SensorDiagnosticTool
                     fs.Close();
                 }
             }
-        }
-    }
-
-    internal class SendDataTextEventsArgs : EventArgs
-    {
-        private readonly string _data;
-        private readonly string _text;
-
-        public SendDataTextEventsArgs(string data, string text)
-        {
-            _data = data;
-            _text = text;
-        }
-
-        public string Data
-        {
-            get { return _data; }
-        }
-
-        public string Text
-        {
-            get { return _text; }
         }
     }
 }

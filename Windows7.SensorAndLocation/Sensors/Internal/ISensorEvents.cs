@@ -1,26 +1,10 @@
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-
 using System;
 using System.Runtime.InteropServices;
-using REFSENSOR_ID = System.Guid;
-
-
 
 namespace Windows7.Sensors.Internal
 {
     /// <summary>
-    /// A COM interop events interface for the ISensorManager object
-    /// </summary>
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("9B3B0B86-266A-4AAD-B21F-FDE5501001B7")]
-    internal interface ISensorManagerEvents
-    {
-        void OnSensorEnter(
-            [In, MarshalAs(UnmanagedType.Interface)] ISensor pSensor,
-            [In, MarshalAs(UnmanagedType.U4)] SensorState state);
-    }
-
-    /// <summary>
-    /// A COM interop events interface for the ISensor object
+    ///     A COM interop events interface for the ISensor object
     /// </summary>
     [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("5D8DCC91-4641-47E7-B7C3-B74F48A6C391")]
     internal interface ISensorEvents
@@ -35,9 +19,9 @@ namespace Windows7.Sensors.Internal
 
         void OnEvent(
             [In, MarshalAs(UnmanagedType.Interface)] ISensor sensor,
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid eventID,
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid eventId,
             [In, MarshalAs(UnmanagedType.Interface)] ISensorDataReport newData);
 
-        void OnLeave([In, MarshalAs(UnmanagedType.LPStruct)] REFSENSOR_ID sensorID);
+        void OnLeave([In, MarshalAs(UnmanagedType.LPStruct)] Guid sensorId);
     }
 }

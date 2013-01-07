@@ -1,20 +1,33 @@
 ﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
-using Windows7.Sensors.Internal;
 using Windows7.Sensors;
+using Windows7.Sensors.Internal;
 
 namespace Windows7.Location.Internal
 {
     /// <summary>
-    /// Creates a civic address location report for the specified data.  Used to set the default location.
+    ///     Creates a civic address location report for the specified data.  Used to set the default location.
     /// </summary>
     internal class DefaultCivicAddressReport : ICivicAddressReport
     {
+        readonly string _CountryRegion;
+        readonly string _PostalCode;
+        readonly string _StateProvince;
+        readonly string _address1;
+        readonly string _address2;
+        readonly string _city;
+        readonly DateTime _timestamp;
+
         /// <summary>
-        /// Initializes the address report.
+        ///     Initializes the address report.
         /// </summary>
-        public DefaultCivicAddressReport(string address1, string address2, string city, string stateProvince, string postalCode, string countryRegion)
+        public DefaultCivicAddressReport(string address1,
+                                         string address2,
+                                         string city,
+                                         string stateProvince,
+                                         string postalCode,
+                                         string countryRegion)
         {
             _timestamp = DateTime.UtcNow;
             InitializeString(ref _CountryRegion, countryRegion);
@@ -26,22 +39,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Sets a string to the specified value.  Sets the string to an empty string when the value is null.
-        /// </summary>
-        private void InitializeString(ref string text, string value)
-        {
-            if (value != null)
-            {
-                text = value;
-            }
-            else
-            {
-                text = string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Return the sensor ID for the default location provider.
+        ///     Return the sensor ID for the default location provider.
         /// </summary>
         public Guid GetSensorID()
         {
@@ -49,7 +47,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Returns the age of the data.
+        ///     Returns the age of the data.
         /// </summary>
         public SYSTEMTIME GetTimestamp()
         {
@@ -57,7 +55,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the specified property value.
+        ///     Gets the specified property value.
         /// </summary>
         /// <param name="pKey">The key identifying requested property.</param>
         public void GetValue(ref PropertyKey pKey, out PROPVARIANT pValue)
@@ -94,7 +92,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the first line of the address.
+        ///     Gets the first line of the address.
         /// </summary>
         public string GetAddressLine1()
         {
@@ -102,7 +100,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the second line of the address.
+        ///     Gets the second line of the address.
         /// </summary>
         public string GetAddressLine2()
         {
@@ -110,7 +108,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the city.
+        ///     Gets the city.
         /// </summary>
         public string GetCity()
         {
@@ -118,7 +116,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the StateProvince.
+        ///     Gets the StateProvince.
         /// </summary>
         public string GetStateProvince()
         {
@@ -126,7 +124,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the postal code.
+        ///     Gets the postal code.
         /// </summary>
         public string GetPostalCode()
         {
@@ -134,7 +132,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Gets the CountryRegion.
+        ///     Gets the CountryRegion.
         /// </summary>
         public string GetCountryRegion()
         {
@@ -142,7 +140,7 @@ namespace Windows7.Location.Internal
         }
 
         /// <summary>
-        /// Reserved.  Not implemented.
+        ///     Reserved.  Not implemented.
         /// </summary>
         public uint GetDetailLevel()
         {
@@ -150,12 +148,19 @@ namespace Windows7.Location.Internal
             return DEFAULT_DETAIL_LEVEL;
         }
 
-        private string _address1;
-        private string _address2;
-        private string _city;
-        private string _StateProvince;
-        private string _PostalCode;
-        private string _CountryRegion;
-        private DateTime _timestamp;
+        /// <summary>
+        ///     Sets a string to the specified value.  Sets the string to an empty string when the value is null.
+        /// </summary>
+        void InitializeString(ref string text, string value)
+        {
+            if (value != null)
+            {
+                text = value;
+            }
+            else
+            {
+                text = string.Empty;
+            }
+        }
     }
 }
