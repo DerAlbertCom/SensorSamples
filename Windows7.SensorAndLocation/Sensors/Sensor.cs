@@ -323,7 +323,7 @@ namespace Windows7.Sensors
         /// <returns>true if supported. false otherwise.</returns>
         public bool SupportsDataField(PropertyKey field)
         {
-            bool supported = false;
+            var supported = false;
             _iSensor.SupportsDataField(field, out supported);
             return supported;
         }

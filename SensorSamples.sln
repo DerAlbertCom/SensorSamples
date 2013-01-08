@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows7.SensorAndLocation"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorDiagnosticTool", "SensorDiagnosticTool\SensorDiagnosticTool.csproj", "{715DEB8A-080D-4AF8-8974-A6D1AFE60648}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorsSample.Console", "SensorsSample.Console\SensorsSample.Console.csproj", "{57F1DF11-AB6D-40E9-979F-BBC80343C668}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,11 +33,18 @@ Global
 		{715DEB8A-080D-4AF8-8974-A6D1AFE60648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{715DEB8A-080D-4AF8-8974-A6D1AFE60648}.Release|Any CPU.Build.0 = Release|Any CPU
 		{715DEB8A-080D-4AF8-8974-A6D1AFE60648}.Release|x86.ActiveCfg = Release|Any CPU
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{57F1DF11-AB6D-40E9-979F-BBC80343C668} = {F3911DB8-3A49-4578-A8DE-0AF4169E43CA}
 		{9055C6EF-F83B-4AE0-8041-F9731124A55E} = {7C1D48FF-FD68-4EB0-BBBE-65231B8D065C}
 	EndGlobalSection
 EndGlobal

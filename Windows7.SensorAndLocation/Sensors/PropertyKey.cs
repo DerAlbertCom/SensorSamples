@@ -98,5 +98,10 @@ namespace Windows7.Sensors
         {
             return !a.Equals(b);
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}", fmtid, pid);
+        }
     }
 }

@@ -305,7 +305,7 @@ namespace SensorDiagnosticTool
         {
             if (this.InvokeRequired)
             {
-                BeginInvoke(new MethodInvoker(delegate() { DataUpdatedHandler(sensor, newData); }));
+                BeginInvoke(new MethodInvoker(() => DataUpdatedHandler(sensor, newData)));
             }
             else
             {
