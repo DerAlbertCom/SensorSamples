@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <index root="\" startIndexAt="Debug StoreApp\layout.resfiles">
+    <default>
+      <qualifier name="language" value="en-US" />
+    </default>
+    <indexer-config type="RESFILES" qualifierDelimiter="." />
+  </index>
+  <index root="\" startIndexAt="Debug StoreApp\resources.resfiles">
+    <default>
+      <qualifier name="language" value="en-US" />
+    </default>
+    <indexer-config type="RESW" convertDotsToSlashes="true" initialPath="FastFiltersWin8" />
+    <indexer-config type="RESJSON" initialPath="FastFiltersWin8" />
+    <indexer-config type="RESFILES" qualifierDelimiter="." />
+  </index>
+  <index root="\" startIndexAt="Debug StoreApp\pri.resfiles">
+    <default>
+      <qualifier name="language" value="en-US" />
+    </default>
+    <indexer-config type="PRI" />
+    <indexer-config type="RESFILES" qualifierDelimiter="." />
+  </index>
+</resources>

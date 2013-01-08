@@ -1,0 +1,19 @@
+﻿Build started 1/8/2013 2:08:07 PM.
+     1>Project "C:\Code\SensorSamples\PixPresenter\C#,C++\FastFiltersWin8\FastFiltersWin8.vcxproj" on node 3 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Code\SensorSamples\PixPresenter\C#,C++\FastFiltersWin8\\" /I"Generated Files\\" /I"Debug StoreApp\\" /ZI /ZW /ZW:nostdlib /nologo /W3 /WX- /sdl /MP /Od /Oy- /D _WINRT_DLL /D _WINDLL /D _UNICODE /D UNICODE /D _DEBUG /D WINAPI_FAMILY=WINAPI_FAMILY_APP /D NETFX_CORE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"pch.h" /Fp"Debug StoreApp\pch.pch" /Fo"Debug StoreApp\\" /Fd"Debug StoreApp\vc110.pdb" /Gd /TP /FU"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.VCLibs\11.0\References\CommonConfiguration\neutral\platform.winmd" /FU"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral\Windows.winmd" /FU"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral\Windows.winmd" /analyze- /errorReport:prompt /bigobj pch.cpp
+         pch.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Code\SensorSamples\PixPresenter\C#,C++\FastFiltersWin8\\" /I"Generated Files\\" /I"Debug StoreApp\\" /ZI /ZW /ZW:nostdlib /nologo /W3 /WX- /sdl /MP /Od /Oy- /D _WINRT_DLL /D _WINDLL /D _UNICODE /D UNICODE /D _DEBUG /D WINAPI_FAMILY=WINAPI_FAMILY_APP /D NETFX_CORE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"pch.h" /Fp"Debug StoreApp\pch.pch" /Fo"Debug StoreApp\\" /Fd"Debug StoreApp\vc110.pdb" /Gd /TP /FU"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.VCLibs\11.0\References\CommonConfiguration\neutral\platform.winmd" /FU"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral\Windows.winmd" /FU"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral\Windows.winmd" /analyze- /errorReport:prompt /bigobj ..\Shared\Code\FastFilters.cpp
+         FastFilters.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFilters.dll" /INCREMENTAL /NOLOGO runtimeobject.lib kernel32.lib /MANIFEST:NO /DEBUG /PDB:"C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFilters.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /APPCONTAINER /WINMD /WINMDFILE:"C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFiltersWin8.winmd" /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /DLL "Debug StoreApp\FastFilters.obj"
+         "Debug StoreApp\pch.obj"
+            Creating library C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFilters.lib and object C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFilters.exp
+         FastFiltersWin8.vcxproj -> C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFilters.dll
+       _GenerateProjectPriFileCore:
+         C:\Program Files (x86)\Windows Kits\8.0\bin\x86\MakePri.exe New -ProjectRoot "C:\Code\SensorSamples\PixPresenter\C#,C++\FastFiltersWin8\\" -ConfigXml "Debug StoreApp\priconfig.xml" -OutputFile "C:\Code\SensorSamples\PixPresenter\C#,C++\Debug StoreApp\FastFiltersWin8\FastFiltersWin8.pri" -IndexName FastFiltersWin8 -Verbose -Overwrite  
+     1>Done Building Project "C:\Code\SensorSamples\PixPresenter\C#,C++\FastFiltersWin8\FastFiltersWin8.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.24
