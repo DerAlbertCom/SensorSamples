@@ -39,7 +39,8 @@ namespace Windows7.Sensors
         static readonly Guid SENSOR_DATA_TYPE_LOCATION_COMMON = new Guid(0X055C74D8, 0XCA6F, 0X47D6, 0X95, 0XC6, 0X1E,
                                                                          0XD3, 0X63, 0X7A, 0X0F, 0XF4);
 
-        static readonly Guid SENSOR_DATA_TYPE_TEMPERATURE_COMMON = new Guid(0X8B0AA2F1, 0X2D57, 0X42EE, 0X8C, 0XC0, 0X4D, 0X27, 0X62, 0X2B, 0X46, 0XC4);
+        static readonly Guid SENSOR_DATA_TYPE_TEMPERATURE_COMMON = new Guid(0X8B0AA2F1, 0X2D57, 0X42EE, 0X8C, 0XC0, 0X4D,
+                                                                            0X27, 0X62, 0X2B, 0X46, 0XC4);
 
         /// <summary>
         ///     The sensor type property key.
@@ -499,5 +500,8 @@ namespace Windows7.Sensors
         public static readonly PropertyKey SENSOR_DATA_TYPE_RFID_TAG_40_BIT =
             PropertyKey.Create(SENSOR_DATA_TYPE_RFID_COMMON, 2);
 
+        /// <summary>
+        ///     The sensor sampling rate property key.
+        /// </summary>
     }
 }
