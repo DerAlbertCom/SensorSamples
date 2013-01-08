@@ -49,10 +49,10 @@
                 </Grid.RowDefinitions>
                 <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Latitude: " />
                 <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Longitude: " />
-                <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Accuracy: " />
+                <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Country: " />
                 <TextBlock x:Name="ScenarioOutput_Latitude" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_Longitude" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data" />
-                <TextBlock x:Name="ScenarioOutput_Accuracy" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data" />
+                <TextBlock x:Name="ScenarioOutput_Country" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data" />
             </Grid>
         </Grid>
 

@@ -95,7 +95,7 @@ namespace Microsoft.Samples.Devices.Geolocation
 
                 ScenarioOutput_Latitude.Text = pos.Coordinate.Latitude.ToString();
                 ScenarioOutput_Longitude.Text = pos.Coordinate.Longitude.ToString();
-                ScenarioOutput_Accuracy.Text = pos.Coordinate.Accuracy.ToString();
+                ScenarioOutput_Country.Text = pos.CivicAddress.Country;
             }
             catch (System.UnauthorizedAccessException)
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Samples.Devices.Geolocation
 
                 ScenarioOutput_Latitude.Text = "No data";
                 ScenarioOutput_Longitude.Text = "No data";
-                ScenarioOutput_Accuracy.Text = "No data";
+                ScenarioOutput_Country.Text = "No data";
             }
             catch (TaskCanceledException)
             {
