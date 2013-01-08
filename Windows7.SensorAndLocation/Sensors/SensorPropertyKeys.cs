@@ -15,33 +15,39 @@ namespace Windows7.Sensors
         static readonly Guid SENSOR_PROPERTY_COMMON_GUID = new Guid(0X7F8383EC, 0XD3EC, 0X495C, 0XA8, 0XCF, 0XB8, 0XBB,
                                                                     0XE8, 0X5C, 0X29, 0X20);
 
-        static readonly Guid SENSOR_DATA_TYPE_COMMON_GUID = new Guid(0XDB5E0CF2, 0XCF1F, 0X4C18, 0XB4, 0X6C, 0XD8, 0X60, 0X11,
-                                                                0XD6, 0X21, 0X50);
+        static readonly Guid SENSOR_DATA_TYPE_COMMON_GUID = new Guid(0XDB5E0CF2, 0XCF1F, 0X4C18, 0XB4, 0X6C, 0XD8, 0X60,
+                                                                     0X11,
+                                                                     0XD6, 0X21, 0X50);
 
         static readonly Guid SENSOR_DATA_TYPE_MOTION_GUID = new Guid(0X3F8A69A2, 0X7C5, 0X4E48, 0XA9, 0X65, 0XCD, 0X79,
-                                                                       0X7A, 0XAB, 0X56, 0XD5);
+                                                                     0X7A, 0XAB, 0X56, 0XD5);
 
         static readonly Guid SENSOR_TYPE_ACCELEROMETER_3D_GUID = SensorTypes.Accelerometer3D;
 
-        static readonly Guid SENSOR_DATA_TYPE_GUID_MECHANICAL_GUID = new Guid(0X38564A7C, 0XF2F2, 0X49BB, 0X9B, 0X2B, 0XBA, 0X60,
-                                                                      0XF6, 0X6A, 0X58, 0XDF);
+        static readonly Guid SENSOR_DATA_TYPE_GUID_MECHANICAL_GUID = new Guid(0X38564A7C, 0XF2F2, 0X49BB, 0X9B, 0X2B,
+                                                                              0XBA, 0X60,
+                                                                              0XF6, 0X6A, 0X58, 0XDF);
 
-        static readonly Guid SENSOR_DATA_TYPE_BIOMETRIC_GUID = new Guid(0X2299288A, 0X6D9E, 0X4B0B, 0XB7, 0XEC, 0X35, 0X28,
-                                                                   0XF8, 0X9E, 0X40, 0XAF);
+        static readonly Guid SENSOR_DATA_TYPE_BIOMETRIC_GUID = new Guid(0X2299288A, 0X6D9E, 0X4B0B, 0XB7, 0XEC, 0X35,
+                                                                        0X28,
+                                                                        0XF8, 0X9E, 0X40, 0XAF);
 
         static readonly Guid SENSOR_DATA_TYPE_SCANNER_GUID = new Guid(0XD7A59A3C, 0X3421, 0X44AB, 0X8D, 0X3A, 0X9D, 0XE8,
-                                                                     0XAB, 0X6C, 0X4C, 0XAE);
+                                                                      0XAB, 0X6C, 0X4C, 0XAE);
 
         static readonly Guid SENSOR_DATA_TYPE_LIGHT_GUID = new Guid(0XE4C77CE2, 0XDCB7, 0X46E9, 0X84, 0X39, 0X4F,
-                                                                        0XEC, 0X54, 0X88, 0X33, 0XA6);
+                                                                    0XEC, 0X54, 0X88, 0X33, 0XA6);
 
         static readonly Guid SENSOR_DATA_TYPE_LOCATION_GUID = new Guid(0X055C74D8, 0XCA6F, 0X47D6, 0X95, 0XC6, 0X1E,
-                                                                         0XD3, 0X63, 0X7A, 0X0F, 0XF4);
+                                                                       0XD3, 0X63, 0X7A, 0X0F, 0XF4);
 
         static readonly Guid SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID = new Guid(0X8B0AA2F1, 0X2D57, 0X42EE, 0X8C, 0XC0, 0X4D,
                                                                             0X27, 0X62, 0X2B, 0X46, 0XC4);
 
-                static readonly Guid SENSOR_DATA_TYPE_ELECTRICAL_GUID = new Guid(0XBBB246D1, 0XE242, 0X4780, 0XA2, 0XD3, 0XCD, 0XED, 0X84, 0XF3, 0X58, 0X42);
+        static readonly Guid SENSOR_DATA_TYPE_ORIENTATION_GUID = new Guid(0X1637D8A2, 0X4248, 0X4275, 0X86, 0X5D, 0X55, 0X8D, 0XE8, 0X4A, 0XED, 0XFD);
+
+        static readonly Guid SENSOR_DATA_TYPE_ELECTRICAL_GUID = new Guid(0XBBB246D1, 0XE242, 0X4780, 0XA2, 0XD3, 0XCD,
+                                                                         0XED, 0X84, 0XF3, 0X58, 0X42);
 
 
         /// <summary>
@@ -340,24 +346,50 @@ namespace Windows7.Sensors
         public static readonly PropertyKey SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_ERROR_METERS =
             PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 30);
 
-        public static readonly PropertyKey SENSOR_DATA_TYPE_GPS_SELECTION_MODE = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 31);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_GPS_OPERATION_MODE = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 32);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_GPS_STATUS = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 33);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_GEOIDAL_SEPARATION = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 34);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_DGPS_DATA_AGE = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 35);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ALTITUDE_ANTENNA_SEALEVEL_METERS = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 36);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_DIFFERENTIAL_REFERENCE_STATION_ID = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 37);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_NMEA_SENTENCE = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 38);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ID = PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 39);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_GPS_SELECTION_MODE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 31);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_GPS_OPERATION_MODE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 32);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_GPS_STATUS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 33);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_GEOIDAL_SEPARATION =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 34);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_DGPS_DATA_AGE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 35);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ALTITUDE_ANTENNA_SEALEVEL_METERS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 36);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_DIFFERENTIAL_REFERENCE_STATION_ID =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 37);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_NMEA_SENTENCE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 38);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ID =
+            PropertyKey.Create(SENSOR_DATA_TYPE_LOCATION_GUID, 39);
 
         /// <summary>
         ///     The sensor temperature in celsius property key.
         /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_TEMPERATURE_CELSIUS = PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 2);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_RELATIVE_HUMIDITY_PERCENT = PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 3);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ATMOSPHERIC_PRESSURE_BAR = PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 4);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_WIND_DIRECTION_DEGREES_ANTICLOCKWISE = PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 5);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_WIND_SPEED_METERS_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 6);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_TEMPERATURE_CELSIUS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 2);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_RELATIVE_HUMIDITY_PERCENT =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 3);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ATMOSPHERIC_PRESSURE_BAR =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 4);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_WIND_DIRECTION_DEGREES_ANTICLOCKWISE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 5);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_WIND_SPEED_METERS_PER_SECOND =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID, 6);
 
         /// <summary>
         ///     The sensor gravitational acceleration (X-axis) property key.
@@ -396,11 +428,20 @@ namespace Windows7.Sensors
             PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 7);
 
 
-        public static readonly PropertyKey SENSOR_DATA_TYPE_SPEED_METERS_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 8);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_MOTION_STATE = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 9);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_X_DEGREES_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 10);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Y_DEGREES_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 11);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Z_DEGREES_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 12);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_SPEED_METERS_PER_SECOND =
+            PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 8);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MOTION_STATE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 9);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_X_DEGREES_PER_SECOND =
+            PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 10);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Y_DEGREES_PER_SECOND =
+            PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 11);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Z_DEGREES_PER_SECOND =
+            PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 12);
 
         /// <summary>
         ///     The sensor angle in degrees (X-axis) property key.
@@ -515,8 +556,10 @@ namespace Windows7.Sensors
         /// </summary>
         public static readonly PropertyKey SENSOR_DATA_TYPE_LIGHT_LUX =
             PropertyKey.Create(SENSOR_DATA_TYPE_LIGHT_GUID, 2);
+
         public static readonly PropertyKey SENSOR_DATA_TYPE_LIGHT_TEMPERATURE_KELVIN =
             PropertyKey.Create(SENSOR_DATA_TYPE_LIGHT_GUID, 3);
+
         public static readonly PropertyKey SENSOR_DATA_TYPE_LIGHT_CHROMACITY =
             PropertyKey.Create(SENSOR_DATA_TYPE_LIGHT_GUID, 4);
 
@@ -527,14 +570,28 @@ namespace Windows7.Sensors
         public static readonly PropertyKey SENSOR_DATA_TYPE_RFID_TAG_40_BIT =
             PropertyKey.Create(SENSOR_DATA_TYPE_SCANNER_GUID, 2);
 
-        public static readonly PropertyKey SENSOR_DATA_TYPE_VOLTAGE_VOLTS = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 2);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_CURRENT_AMPS = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 3);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_CAPACITANCE_FARAD = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 4);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_RESISTANCE_OHMS = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 5);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_INDUCTANCE_HENRY = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 6);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_POWER_WATTS = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 7);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_PERCENT_OF_RANGE = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 8);
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_FREQUENCY_HERTZ = PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 9);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_VOLTAGE_VOLTS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 2);
 
+        public static readonly PropertyKey SENSOR_DATA_TYPE_CURRENT_AMPS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 3);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_CAPACITANCE_FARAD =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 4);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_RESISTANCE_OHMS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 5);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_INDUCTANCE_HENRY =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 6);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_POWER_WATTS =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 7);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_PERCENT_OF_RANGE =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 8);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_FREQUENCY_HERTZ =
+            PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 9);
     }
 }
