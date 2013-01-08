@@ -22,7 +22,6 @@ namespace Windows7.Sensors
         static readonly Guid SENSOR_DATA_TYPE_MOTION_GUID = new Guid(0X3F8A69A2, 0X7C5, 0X4E48, 0XA9, 0X65, 0XCD, 0X79,
                                                                      0X7A, 0XAB, 0X56, 0XD5);
 
-        static readonly Guid SENSOR_TYPE_ACCELEROMETER_3D_GUID = SensorTypes.Accelerometer3D;
 
         static readonly Guid SENSOR_DATA_TYPE_GUID_MECHANICAL_GUID = new Guid(0X38564A7C, 0XF2F2, 0X49BB, 0X9B, 0X2B,
                                                                               0XBA, 0X60,
@@ -443,63 +442,6 @@ namespace Windows7.Sensors
         public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Z_DEGREES_PER_SECOND =
             PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_GUID, 12);
 
-        /// <summary>
-        ///     The sensor angle in degrees (X-axis) property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGLE_X_DEGREES =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 2);
-
-        /// <summary>
-        ///     The sensor angle in degrees (Y-axis) property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGLE_Y_DEGREES =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 3);
-
-        /// <summary>
-        ///     The sensor angle in degrees (Z-axis) property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGLE_Z_DEGREES =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 4);
-
-        /// <summary>
-        ///     The sensor magnetic heading (X-axis) property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_X_DEGREES =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 5);
-
-        /// <summary>
-        ///     The sensor magnetic heading (Y-axis) property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_Y_DEGREES =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 6);
-
-        /// <summary>
-        ///     The sensor magnetic heading (Z-axis) property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_Z_DEGREES =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 7);
-
-        /// <summary>
-        ///     The sensor distance (X-axis) data property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_DISTANCE_X_METERS =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 8);
-
-        /// <summary>
-        ///     The sensor distance (Y-axis) data property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_DISTANCE_Y_METERS =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 9);
-
-        /// <summary>
-        ///     The sensor distance (Z-axis) data property key.
-        /// </summary>
-        public static readonly PropertyKey SENSOR_DATA_TYPE_DISTANCE_Z_METERS =
-            PropertyKey.Create(SENSOR_TYPE_ACCELEROMETER_3D_GUID, 10);
-
-        /// <summary>
-        ///     The sensor boolean switch data property key.
-        /// </summary>
         public static readonly PropertyKey SENSOR_DATA_TYPE_BOOLEAN_SWITCH_STATE =
             PropertyKey.Create(SENSOR_DATA_TYPE_GUID_MECHANICAL_GUID, 2);
 
@@ -593,5 +535,27 @@ namespace Windows7.Sensors
 
         public static readonly PropertyKey SENSOR_DATA_TYPE_ELECTRICAL_FREQUENCY_HERTZ =
             PropertyKey.Create(SENSOR_DATA_TYPE_ELECTRICAL_GUID, 9);
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_TILT_X_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 2);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_TILT_Y_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 3);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_TILT_Z_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 4);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_X_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 5);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_Y_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 6);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_Z_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 7);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_DISTANCE_X_METERS = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 8);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_DISTANCE_Y_METERS = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 9);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_DISTANCE_Z_METERS = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 10);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_COMPENSATED_MAGNETIC_NORTH_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 11);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_COMPENSATED_TRUE_NORTH_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 12);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_MAGNETIC_NORTH_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 13);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_HEADING_TRUE_NORTH_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 14);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_QUADRANT_ANGLE_DEGREES = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 15);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ROTATION_MATRIX = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 16);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_QUATERNION = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 17);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_SIMPLE_DEVICE_ORIENTATION = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 18);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_X_MILLIGAUSS = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 19);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_Y_MILLIGAUSS = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 20);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_Z_MILLIGAUSS = PropertyKey.Create(SENSOR_DATA_TYPE_ORIENTATION_GUID, 21);
+
     }
 }
