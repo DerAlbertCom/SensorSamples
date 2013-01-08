@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -60,83 +62,16 @@ namespace SensorDiagnosticTool
         {
             // Init dictionary to display property keys as strings
             s_keysNames = new Dictionary<PropertyKey, string>();
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ACCELERATION_X_G] = "SENSOR_DATA_TYPE_ACCELERATION_X_G";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ACCELERATION_Y_G] = "SENSOR_DATA_TYPE_ACCELERATION_Y_G";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ACCELERATION_Z_G] = "SENSOR_DATA_TYPE_ACCELERATION_Z_G";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ALTITUDE_ELLIPSOID_METERS] = "SENSOR_DATA_TYPE_ALTITUDE_ELLIPSOID_METERS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_METERS] = "SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_METERS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ANGLE_X_DEGREES] = "SENSOR_DATA_TYPE_ANGLE_X_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ANGLE_Y_DEGREES] = "SENSOR_DATA_TYPE_ANGLE_Y_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ANGLE_Z_DEGREES] = "SENSOR_DATA_TYPE_ANGLE_Z_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_X_DEGREES_PER_SECOND] = "SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_X_DEGREES_PER_SECOND";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Y_DEGREES_PER_SECOND] = "SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Y_DEGREES_PER_SECOND";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Z_DEGREES_PER_SECOND] = "SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Z_DEGREES_PER_SECOND";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_BOOLEAN_SWITCH_ARRAY_STATE] = "SENSOR_DATA_TYPE_BOOLEAN_SWITCH_ARRAY_STATE";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_BOOLEAN_SWITCH_STATE] = "SENSOR_DATA_TYPE_BOOLEAN_SWITCH_STATE";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_DISTANCE_X_METERS] = "SENSOR_DATA_TYPE_DISTANCE_X_METERS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_DISTANCE_Y_METERS] = "SENSOR_DATA_TYPE_DISTANCE_Y_METERS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_DISTANCE_Z_METERS] = "SENSOR_DATA_TYPE_DISTANCE_Z_METERS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_ERROR_RADIUS_METERS] = "SENSOR_DATA_TYPE_ERROR_RADIUS_METERS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_FIX_QUALITY] = "SENSOR_DATA_TYPE_FIX_QUALITY";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_FIX_TYPE] = "SENSOR_DATA_TYPE_FIX_TYPE";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_FORCE_NEWTONS] = "SENSOR_DATA_TYPE_FORCE_NEWTONS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_HORIZONAL_DILUTION_OF_PRECISION] = "SENSOR_DATA_TYPE_HORIZONAL_DILUTION_OF_PRECISION";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_HUMAN_PRESENCE] = "SENSOR_DATA_TYPE_HUMAN_PRESENCE";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_HUMAN_PROXIMITY] = "SENSOR_DATA_TYPE_HUMAN_PROXIMITY";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_LATITUDE_DEGREES] = "SENSOR_DATA_TYPE_LATITUDE_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_LIGHT_LUX] = "SENSOR_DATA_TYPE_LIGHT_LUX";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_LONGITUDE_DEGREES] = "SENSOR_DATA_TYPE_LONGITUDE_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_MAGNETIC_HEADING_DEGREES] = "SENSOR_DATA_TYPE_MAGNETIC_HEADING_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_MAGNETIC_HEADING_X_DEGREES] = "SENSOR_DATA_TYPE_MAGNETIC_HEADING_X_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_MAGNETIC_HEADING_Y_DEGREES] = "SENSOR_DATA_TYPE_MAGNETIC_HEADING_Y_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_MAGNETIC_HEADING_Z_DEGREES] = "SENSOR_DATA_TYPE_MAGNETIC_HEADING_Z_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_MAGNETIC_VARIATION] = "SENSOR_DATA_TYPE_MAGNETIC_VARIATION";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_MULTIVALUE_SWITCH_STATE] = "SENSOR_DATA_TYPE_MULTIVALUE_SWITCH_STATE";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_POSITION_DILUTION_OF_PRECISION] = "SENSOR_DATA_TYPE_POSITION_DILUTION_OF_PRECISION";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_PRESSURE_PASCAL] = "SENSOR_DATA_TYPE_PRESSURE_PASCAL";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_RFID_TAG_40_BIT] = "SENSOR_DATA_TYPE_RFID_TAG_40_BIT";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_IN_VIEW] = "SENSOR_DATA_TYPE_SATELLITES_IN_VIEW";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_AZIMUTH] = "SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_AZIMUTH";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ELEVATION] = "SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ELEVATION";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_PRNS] = "SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_PRNS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_STN_RATIO] = "SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_STN_RATIO";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_USED_COUNT] = "SENSOR_DATA_TYPE_SATELLITES_USED_COUNT";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SATELLITES_USED_PRNS] = "SENSOR_DATA_TYPE_SATELLITES_USED_PRNS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_SPEED_KNOTS] = "SENSOR_DATA_TYPE_SPEED_KNOTS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_STRAIN] = "SENSOR_DATA_TYPE_STRAIN";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_TEMPERATURE_CELSIUS] = "SENSOR_DATA_TYPE_TEMPERATURE_CELSIUS";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_TIMESTAMP] = "SENSOR_DATA_TYPE_TIMESTAMP";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_TRUE_HEADING_DEGREES] = "SENSOR_DATA_TYPE_TRUE_HEADING_DEGREES";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_VERTICAL_DILUTION_OF_PRECISION] = "SENSOR_DATA_TYPE_VERTICAL_DILUTION_OF_PRECISION";
-            s_keysNames[SensorPropertyKeys.SENSOR_DATA_TYPE_WEIGHT_KILOGRAMS] = "SENSOR_DATA_TYPE_WEIGHT_KILOGRAMS";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_ACCURACY] = "SENSOR_PROPERTY_ACCURACY";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_CHANGE_SENSITIVITY] = "SENSOR_PROPERTY_CHANGE_SENSITIVITY";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_CONNECTION_TYPE] = "SENSOR_PROPERTY_CONNECTION_TYPE";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL] = "SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_DESCRIPTION] = "SENSOR_PROPERTY_DESCRIPTION";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_DEVICE_ID] = "SENSOR_PROPERTY_DEVICE_ID";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_FRIENDLY_NAME] = "SENSOR_PROPERTY_FRIENDLY_NAME";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_LIGHT_RESPONSE_CURVE] = "SENSOR_PROPERTY_LIGHT_RESPONSE_CURVE";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_MANUFACTURER] = "SENSOR_PROPERTY_MANUFACTURER";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_MIN_REPORT_INTERVAL] = "SENSOR_PROPERTY_MIN_REPORT_INTERVAL";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_MODEL] = "SENSOR_PROPERTY_MODEL";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_PERSISTENT_UNIQUE_ID] = "SENSOR_PROPERTY_PERSISTENT_UNIQUE_ID";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_RESOLUTION] = "SENSOR_PROPERTY_RESOLUTION";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_SAMPLING_RATE] = "SENSOR_PROPERTY_SAMPLING_RATE";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_SERIAL_NUMBER] = "SENSOR_PROPERTY_SERIAL_NUMBER";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_STATE] = "SENSOR_PROPERTY_STATE";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_TYPE] = "SENSOR_PROPERTY_TYPE";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_LOCATION_DESIRED_ACCURACY] = "SENSOR_PROPERTY_LOCATION_DESIRED_ACCURACY";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_RANGE_MINIMUM] = "SENSOR_PROPERTY_RANGE_MINIMUM";
-            s_keysNames[SensorPropertyKeys.SENSOR_PROPERTY_RANGE_MAXIMUM] = "SENSOR_PROPERTY_RANGE_MAXIMUM";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_CAN_DELETE] = "WPD_OBJECT_CAN_DELETE";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_CONTENT_TYPE] = "WPD_OBJECT_CONTENT_TYPE";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_FORMAT] = "WPD_OBJECT_FORMAT";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_ID] = "WPD_OBJECT_ID";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_NAME] = "WPD_OBJECT_NAME";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_PARENT_ID] = "WPD_OBJECT_PARENT_ID";
-            s_keysNames[WPDPropertyKeys.WPD_OBJECT_PERSISTENT_UNIQUE_ID] = "WPD_OBJECT_PERSISTENT_UNIQUE_ID";
-            s_keysNames[WPDPropertyKeys.WPD_FUNCTIONAL_OBJECT_CATEGORY] = "WPD_FUNCTIONAL_OBJECT_CATEGORY";
+            foreach (var fieldInfo in typeof(SensorPropertyKeys).GetFields(BindingFlags.Static|BindingFlags.Public).Where(fi=>fi.FieldType==typeof(PropertyKey)))
+            {
+                var propertyKey = (PropertyKey) fieldInfo.GetValue(null);
+                s_keysNames[propertyKey] = fieldInfo.Name;
+            }
+            foreach (var fieldInfo in typeof(WPDPropertyKeys).GetFields(BindingFlags.Static | BindingFlags.Public).Where(fi => fi.FieldType == typeof(PropertyKey)))
+            {
+                var propertyKey = (PropertyKey)fieldInfo.GetValue(null);
+                s_keysNames[propertyKey] = fieldInfo.Name;
+            }
 
             //KeysNames[SensorPropertyKeys.SENSOR_PROPERTY_COMMON_GUID] = "SENSOR_PROPERTY_COMMON_GUID";
 
@@ -145,69 +80,21 @@ namespace SensorDiagnosticTool
 
             // Value dictionary for Sensor Type
             Dictionary<string, string> dictionaryType = new Dictionary<string, string>();
-            dictionaryType[SensorTypes.Accelerometer1d.ToString()] = "SENSOR_TYPE_ACCELEROMETER_1D";
-            dictionaryType[SensorTypes.Accelerometer2d.ToString()] = "SENSOR_TYPE_ACCELEROMETER_2D";
-            dictionaryType[SensorTypes.Accelerometer3d.ToString()] = "SENSOR_TYPE_ACCELEROMETER_3D";
-            dictionaryType[SensorTypes.AmbientLight.ToString()] = "SENSOR_TYPE_AMBIENT_LIGHT";
-            dictionaryType[SensorTypes.BarcodeScanner.ToString()] = "SENSOR_TYPE_BARCODE_SCANNER";
-            dictionaryType[SensorTypes.BooleanSwitch.ToString()] = "SENSOR_TYPE_BOOLEAN_SWITCH";
-            dictionaryType[SensorTypes.BooleanSwitchArray.ToString()] = "SENSOR_TYPE_BOOLEAN_SWITCH_ARRAY";
-            dictionaryType[SensorTypes.Capacitance.ToString()] = "SENSOR_TYPE_CAPACITANCE";
-            dictionaryType[SensorTypes.Compass1d.ToString()] = "SENSOR_TYPE_COMPASS_1D";
-            dictionaryType[SensorTypes.Compass2d.ToString()] = "SENSOR_TYPE_COMPASS_2D";
-            dictionaryType[SensorTypes.Compass3d.ToString()] = "SENSOR_TYPE_COMPASS_3D";
-            dictionaryType[SensorTypes.Current.ToString()] = "SENSOR_TYPE_CURRENT";
-            dictionaryType[SensorTypes.Distance1d.ToString()] = "SENSOR_TYPE_DISTANCE_1D";
-            dictionaryType[SensorTypes.Distance2d.ToString()] = "SENSOR_TYPE_DISTANCE_2D";
-            dictionaryType[SensorTypes.Distance3d.ToString()] = "SENSOR_TYPE_DISTANCE_3D";
-            dictionaryType[SensorTypes.ElectricalPower.ToString()] = "SENSOR_TYPE_ELECTRICAL_POWER";
-            dictionaryType[SensorTypes.EnvironmentalAtmosphericPressure.ToString()] = "SENSOR_TYPE_ENVIRONMENTAL_ATMOSPHERIC_PRESSURE";
-            dictionaryType[SensorTypes.EnvironmentalHumidity.ToString()] = "SENSOR_TYPE_ENVIRONMENTAL_HUMIDITY";
-            dictionaryType[SensorTypes.EnvironmentalTemperature.ToString()] = "SENSOR_TYPE_ENVIRONMENTAL_TEMPERATURE";
-            dictionaryType[SensorTypes.EnvironmentalWindDirection.ToString()] = "SENSOR_TYPE_ENVIRONMENTAL_WIND_DIRECTION";
-            dictionaryType[SensorTypes.EnvironmentalWindSpeed.ToString()] = "SENSOR_TYPE_ENVIRONMENTAL_WIND_SPEED";
-            dictionaryType[SensorTypes.Force.ToString()] = "SENSOR_TYPE_FORCE";
-            dictionaryType[SensorTypes.Gyrometer1d.ToString()] = "SENSOR_TYPE_GYROMETER_1D";
-            dictionaryType[SensorTypes.Gyrometer2d.ToString()] = "SENSOR_TYPE_GYROMETER_2D";
-            dictionaryType[SensorTypes.Gyrometer3d.ToString()] = "SENSOR_TYPE_GYROMETER_3D";
-            dictionaryType[SensorTypes.HumanPresence.ToString()] = "SENSOR_TYPE_HUMAN_PRESENCE";
-            dictionaryType[SensorTypes.HumanProximity.ToString()] = "SENSOR_TYPE_HUMAN_PROXIMITY";
-            dictionaryType[SensorTypes.Inclinometer1d.ToString()] = "SENSOR_TYPE_INCLINOMETER_1D";
-            dictionaryType[SensorTypes.Inclinometer2d.ToString()] = "SENSOR_TYPE_INCLINOMETER_2D";
-            dictionaryType[SensorTypes.Inclinometer3d.ToString()] = "SENSOR_TYPE_INCLINOMETER_3D";
-            dictionaryType[SensorTypes.Inductance.ToString()] = "SENSOR_TYPE_INDUCTANCE";
-            dictionaryType[SensorTypes.LocationBroadcast.ToString()] = "SENSOR_TYPE_LOCATION_BROADCAST";
-            dictionaryType[SensorTypes.LocationDeadReconing.ToString()] = "SENSOR_TYPE_LOCATION_DEAD_RECKONING";
-            dictionaryType[SensorTypes.LocationGps.ToString()] = "SENSOR_TYPE_LOCATION_GPS";
-            dictionaryType[SensorTypes.LocationLookup.ToString()] = "SENSOR_TYPE_LOCATION_LOOKUP";
-            dictionaryType[SensorTypes.LocationOther.ToString()] = "SENSOR_TYPE_LOCATION_OTHER";
-            dictionaryType[SensorTypes.LocationStatic.ToString()] = "SENSOR_TYPE_LOCATION_STATIC";
-            dictionaryType[SensorTypes.LocationTriangulation.ToString()] = "SENSOR_TYPE_LOCATION_TRIANGULATION";
-            dictionaryType[SensorTypes.MotionDetector.ToString()] = "SENSOR_TYPE_MOTION_DETECTOR";
-            dictionaryType[SensorTypes.MultiValueSwitch.ToString()] = "SENSOR_TYPE_MULTIVALUE_SWITCH";
-            dictionaryType[SensorTypes.Potentiometer.ToString()] = "SENSOR_TYPE_POTENTIOMETER";
-            dictionaryType[SensorTypes.Pressure.ToString()] = "SENSOR_TYPE_PRESSURE";
-            dictionaryType[SensorTypes.Resistance.ToString()] = "SENSOR_TYPE_RESISTANCE";
-            dictionaryType[SensorTypes.RFIDScanner.ToString()] = "SENSOR_TYPE_RFID_SCANNER";
-            dictionaryType[SensorTypes.Scale.ToString()] = "SENSOR_TYPE_SCALE";
-            dictionaryType[SensorTypes.Speedometer.ToString()] = "SENSOR_TYPE_SPEEDOMETER";
-            dictionaryType[SensorTypes.Strain.ToString()] = "SENSOR_TYPE_STRAIN";
-            dictionaryType[SensorTypes.Touch.ToString()] = "SENSOR_TYPE_TOUCH";
-            dictionaryType[SensorTypes.Voltage.ToString()] = "SENSOR_TYPE_VOLTAGE";
+            foreach (var fieldInfo in typeof(SensorTypes).GetFields(BindingFlags.Static | BindingFlags.Public).Where(fi => fi.FieldType == typeof(Guid)))
+            {
+                var guid= (Guid)fieldInfo.GetValue(null);
+                dictionaryType[fieldInfo.ToString()] = string.Format("SensorTypes.{0}", fieldInfo.Name);
+            }
+
             s_keysValuesNames[SensorPropertyKeys.SENSOR_PROPERTY_TYPE] = dictionaryType;
 
             // Value dictionary for Sensor Category
             Dictionary<string, string> dictionaryCategory = new Dictionary<string, string>();
-            dictionaryCategory[SensorCategories.All.ToString()] = "All";
-            dictionaryCategory[SensorCategories.BioMetric.ToString()] = "BioMetric";
-            dictionaryCategory[SensorCategories.Electrical.ToString()] = "Electrical";
-            dictionaryCategory[SensorCategories.Environmental.ToString()] = "Environmental";
-            dictionaryCategory[SensorCategories.Light.ToString()] = "Light";
-            dictionaryCategory[SensorCategories.Location.ToString()] = "Location";
-            dictionaryCategory[SensorCategories.Mechanical.ToString()] = "Mechanical";
-            dictionaryCategory[SensorCategories.Motion.ToString()] = "Motion";
-            dictionaryCategory[SensorCategories.Orientation.ToString()] = "Orientation";
-            dictionaryCategory[SensorCategories.Scanner.ToString()] = "Scanner";
+            foreach (var fieldInfo in typeof(SensorCategories).GetFields(BindingFlags.Static | BindingFlags.Public).Where(fi => fi.FieldType == typeof(Guid)))
+            {
+                var guid = (Guid)fieldInfo.GetValue(null);
+                dictionaryCategory[fieldInfo.ToString()] = string.Format("SensorCategories.{0}", fieldInfo.Name);
+            }
             s_keysValuesNames[WPDPropertyKeys.WPD_FUNCTIONAL_OBJECT_CATEGORY] = dictionaryCategory;
 
             // Init static logs

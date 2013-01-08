@@ -380,6 +380,13 @@ namespace Windows7.Sensors
         public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Z_DEGREES_PER_SECOND =
             PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_COMMON, 7);
 
+
+        public static readonly PropertyKey SENSOR_DATA_TYPE_SPEED_METERS_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_COMMON, 8);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_MOTION_STATE = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_COMMON, 9);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_X_DEGREES_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_COMMON, 10);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Y_DEGREES_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_COMMON, 11);
+        public static readonly PropertyKey SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Z_DEGREES_PER_SECOND = PropertyKey.Create(SENSOR_DATA_TYPE_MOTION_COMMON, 12);
+
         /// <summary>
         ///     The sensor angle in degrees (X-axis) property key.
         /// </summary>
@@ -496,6 +503,7 @@ namespace Windows7.Sensors
 
         /// <summary>
         ///     The sensor 40-bit RFID tag data property key.
+        /// 
         /// </summary>
         public static readonly PropertyKey SENSOR_DATA_TYPE_RFID_TAG_40_BIT =
             PropertyKey.Create(SENSOR_DATA_TYPE_RFID_COMMON, 2);
