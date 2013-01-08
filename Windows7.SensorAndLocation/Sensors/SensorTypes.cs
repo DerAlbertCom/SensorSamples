@@ -82,19 +82,19 @@ namespace Windows7.Sensors
         /// <summary>
         ///     The accelerometer sensor type property key.
         /// </summary>
-        public static readonly Guid Accelerometer1d = new Guid(0xC04D2387, 0x7340, 0x4CC2, 0x99, 0x1E, 0x3B, 0x18, 0xCB,
+        public static readonly Guid Accelerometer1D = new Guid(0xC04D2387, 0x7340, 0x4CC2, 0x99, 0x1E, 0x3B, 0x18, 0xCB,
                                                                0x8E, 0xF2, 0xF4);
 
         /// <summary>
         ///     The 2d accelerometer sensor type property key.
         /// </summary>
-        public static readonly Guid Accelerometer2d = new Guid(0xB2C517A8, 0xF6B5, 0x4BA6, 0xA4, 0x23, 0x5D, 0xF5, 0x60,
+        public static readonly Guid Accelerometer2D = new Guid(0xB2C517A8, 0xF6B5, 0x4BA6, 0xA4, 0x23, 0x5D, 0xF5, 0x60,
                                                                0xB4, 0xCC, 0x7);
 
         /// <summary>
         ///     The 3d accelerometer sensor type property key.
         /// </summary>
-        public static readonly Guid Accelerometer3d = new Guid(0xC2FB0F5F, 0xE2D2, 0x4C78, 0xBC, 0xD0, 0x35, 0x2A, 0x95,
+        public static readonly Guid Accelerometer3D = new Guid(0xC2FB0F5F, 0xE2D2, 0x4C78, 0xBC, 0xD0, 0x35, 0x2A, 0x95,
                                                                0x82, 0x81, 0x9D);
 
         /// <summary>
@@ -106,19 +106,19 @@ namespace Windows7.Sensors
         /// <summary>
         ///     The gyrometer sensor type property key.
         /// </summary>
-        public static readonly Guid Gyrometer1d = new Guid(0xFA088734, 0xF552, 0x4584, 0x83, 0x24, 0xED, 0xFA, 0xF6,
+        public static readonly Guid Gyrometer1D = new Guid(0xFA088734, 0xF552, 0x4584, 0x83, 0x24, 0xED, 0xFA, 0xF6,
                                                            0x49, 0x65, 0x2C);
 
         /// <summary>
         ///     The 2d gyrometer sensor type property key.
         /// </summary>
-        public static readonly Guid Gyrometer2d = new Guid(0x31EF4F83, 0x919B, 0x48BF, 0x8D, 0xE0, 0x5D, 0x7A, 0x9D,
+        public static readonly Guid Gyrometer2D = new Guid(0x31EF4F83, 0x919B, 0x48BF, 0x8D, 0xE0, 0x5D, 0x7A, 0x9D,
                                                            0x24, 0x5, 0x56);
 
         /// <summary>
         ///     The 3d gyrometer sensor type property key.
         /// </summary>
-        public static readonly Guid Gyrometer3d = new Guid(0x9485F5A, 0x759E, 0x42C2, 0xBD, 0x4B, 0xA3, 0x49, 0xB7, 0x5C,
+        public static readonly Guid Gyrometer3D = new Guid(0x9485F5A, 0x759E, 0x42C2, 0xBD, 0x4B, 0xA3, 0x49, 0xB7, 0x5C,
                                                            0x86, 0x43);
 
         /// <summary>
@@ -130,56 +130,60 @@ namespace Windows7.Sensors
         /// <summary>
         ///     The compass sensor type property key.
         /// </summary>
-        public static readonly Guid Compass1d = new Guid(0xA415F6C5, 0xCB50, 0x49D0, 0x8E, 0x62, 0xA8, 0x27, 0xB, 0xD7,
+        public static readonly Guid Compass1D = new Guid(0xA415F6C5, 0xCB50, 0x49D0, 0x8E, 0x62, 0xA8, 0x27, 0xB, 0xD7,
                                                          0xA2, 0x6C);
 
         /// <summary>
         ///     The 2d compass sensor type property key.
         /// </summary>
-        public static readonly Guid Compass2d = new Guid(0x15655CC0, 0x997A, 0x4D30, 0x84, 0xDB, 0x57, 0xCA, 0xBA, 0x36,
+        public static readonly Guid Compass2D = new Guid(0x15655CC0, 0x997A, 0x4D30, 0x84, 0xDB, 0x57, 0xCA, 0xBA, 0x36,
                                                          0x48, 0xBB);
 
         /// <summary>
         ///     The 3d compass sensor type property key.
         /// </summary>
-        public static readonly Guid Compass3d = new Guid(0x76B5CE0D, 0x17DD, 0x414D, 0x93, 0xA1, 0xE1, 0x27, 0xF4, 0xB,
+        public static readonly Guid Compass3D = new Guid(0x76B5CE0D, 0x17DD, 0x414D, 0x93, 0xA1, 0xE1, 0x27, 0xF4, 0xB,
                                                          0xDF, 0x6E);
 
         /// <summary>
         ///     The inclinometer sensor type property key.
         /// </summary>
-        public static readonly Guid Inclinometer1d = new Guid(0xB96F98C5, 0x7A75, 0x4BA7, 0x94, 0xE9, 0xAC, 0x86, 0x8C,
+        public static readonly Guid Inclinometer1D = new Guid(0xB96F98C5, 0x7A75, 0x4BA7, 0x94, 0xE9, 0xAC, 0x86, 0x8C,
                                                               0x96, 0x6D, 0xD8);
 
         /// <summary>
         ///     The 2D inclinometer sensor type property key.
         /// </summary>
-        public static readonly Guid Inclinometer2d = new Guid(0xAB140F6D, 0x83EB, 0x4264, 0xB7, 0xB, 0xB1, 0x6A, 0x5B,
+        public static readonly Guid Inclinometer2D = new Guid(0xAB140F6D, 0x83EB, 0x4264, 0xB7, 0xB, 0xB1, 0x6A, 0x5B,
                                                               0x25, 0x6A, 0x1);
 
         /// <summary>
         ///     The 3D inclinometer sensor type property key.
         /// </summary>
-        public static readonly Guid Inclinometer3d = new Guid(0xB84919FB, 0xEA85, 0x4976, 0x84, 0x44, 0x6F, 0x6F, 0x5C,
+        public static readonly Guid Inclinometer3D = new Guid(0xB84919FB, 0xEA85, 0x4976, 0x84, 0x44, 0x6F, 0x6F, 0x5C,
                                                               0x6D, 0x31, 0xDB);
 
         /// <summary>
         ///     The distance sensor type property key.
         /// </summary>
-        public static readonly Guid Distance1d = new Guid(0x5F14AB2F, 0x1407, 0x4306, 0xA9, 0x3F, 0xB1, 0xDB, 0xAB, 0xE4,
+        public static readonly Guid Distance1D = new Guid(0x5F14AB2F, 0x1407, 0x4306, 0xA9, 0x3F, 0xB1, 0xDB, 0xAB, 0xE4,
                                                           0xF9, 0xC0);
 
         /// <summary>
         ///     The 2D sensor type property key.
         /// </summary>
-        public static readonly Guid Distance2d = new Guid(0x5CF9A46C, 0xA9A2, 0x4E55, 0xB6, 0xA1, 0xA0, 0x4A, 0xAF, 0xA9,
+        public static readonly Guid Distance2D = new Guid(0x5CF9A46C, 0xA9A2, 0x4E55, 0xB6, 0xA1, 0xA0, 0x4A, 0xAF, 0xA9,
                                                           0x5A, 0x92);
 
         /// <summary>
         ///     The 3D distance sensor type property key.
         /// </summary>
-        public static readonly Guid Distance3d = new Guid(0xA20CAE31, 0xE25, 0x4772, 0x9F, 0xE5, 0x96, 0x60, 0x8A, 0x13,
+        public static readonly Guid Distance3D = new Guid(0xA20CAE31, 0xE25, 0x4772, 0x9F, 0xE5, 0x96, 0x60, 0x8A, 0x13,
                                                           0x54, 0xB2);
+
+        public static readonly Guid AggregatedQuadrantOrientation = new Guid(0X9F81F1AF, 0XC4AB, 0X4307, 0X99, 0X04, 0XC8, 0X28, 0XBF, 0XB9, 0X08, 0X29);
+        public static readonly Guid AggregatedDeviceOrientation = new Guid(0XCDB5D8F7, 0X3CFD, 0X41C8, 0X85, 0X42, 0XCC, 0XE6, 0X22, 0XCF, 0X5D, 0X6E);
+        public static readonly Guid AggregatedSimpleDeviceOrientation = new Guid(0X86A19291, 0X0482, 0X402C, 0XBF, 0X4C, 0XAD, 0XDA, 0XC5, 0X2B, 0X1C, 0X39);
 
         /// <summary>
         ///     The electrical voltage sensor type property key.
@@ -223,6 +227,7 @@ namespace Windows7.Sensors
         public static readonly Guid Potentiometer = new Guid(0x2B3681A9, 0xCADC, 0x45AA, 0xA6, 0xFF, 0x54, 0x95, 0x7C,
                                                              0x8B, 0xB4, 0x40);
 
+        public static readonly Guid Frequency = new Guid(0X8CD2CBB6, 0X73E6, 0X4640, 0XA7, 0X09, 0X72, 0XAE, 0X8F, 0XB6, 0X0D, 0X7F);
         /// <summary>
         ///     The boolean switch sensor type property key.
         /// </summary>
@@ -298,7 +303,10 @@ namespace Windows7.Sensors
         /// <summary>
         ///     The bar code scanner sensor type property key.
         /// </summary>
-        public static readonly Guid BarcodeScanner = new Guid(0x990B3D8F, 0x85BB, 0x45FF, 0x91, 0x4D, 0x99, 0x8C, 0x4,
-                                                              0xF3, 0x72, 0xDF);
+        public static readonly Guid Custom = new Guid(0XE83AF229, 0X8640, 0X4D18, 0XA2, 0X13, 0XE2, 0X26, 0X75, 0XEB, 0XB2, 0XC3);
+
+        public static readonly Guid Unknown = new Guid(0X10BA83E3, 0XEF4F, 0X41ED, 0X98, 0X85, 0XA8, 0X7D, 0X64, 0X35, 0XA8, 0XE1);
+
+
     }
 }
